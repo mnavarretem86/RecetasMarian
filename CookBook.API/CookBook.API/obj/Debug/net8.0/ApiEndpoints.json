@@ -1,0 +1,180 @@
+[
+  {
+    "ContainingType": "CookBook.API.Controllers.CategoriaController",
+    "Method": "ActualizarCategoria",
+    "RelativePath": "api/Categoria/ Actualizar Categorias",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receta",
+        "Type": "CAPA_ENTIDADES.CE_CATEGORIA",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.CategoriaController",
+    "Method": "ObtenerCategoria",
+    "RelativePath": "api/Categoria/Categorias",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.CategoriaController",
+    "Method": "GuardarCategoria",
+    "RelativePath": "api/Categoria/Guardar  categorias",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receta",
+        "Type": "CAPA_ENTIDADES.CE_CATEGORIA",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.RECETASController",
+    "Method": "GuardarReceta",
+    "RelativePath": "api/RECETAS/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receta",
+        "Type": "CAPA_ENTIDADES.RecetaCompletaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.RECETASController",
+    "Method": "EliminarRecetas",
+    "RelativePath": "api/RECETAS/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.RECETASController",
+    "Method": "ListarRecetasDetalle",
+    "RelativePath": "api/RECETAS/list",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[CAPA_ENTIDADES.CE_RECETAS_DETALLES, CAPA_ENTIDADES, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.RECETASController",
+    "Method": "ActualizarReceta",
+    "RelativePath": "api/RECETAS/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receta",
+        "Type": "CAPA_ENTIDADES.RecetaCompletaDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.UsuarioController",
+    "Method": "ActualizarUsuario",
+    "RelativePath": "api/Usuario/actualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CAPA_ENTIDADES.CE_USUARIO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.UsuarioController",
+    "Method": "IniciarSesion",
+    "RelativePath": "api/Usuario/IniciarSesion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CookBook.API.APIModels.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.UsuarioController",
+    "Method": "ObtenerUsuarioSesion",
+    "RelativePath": "api/Usuario/ObtenerUsuarioSesion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.UsuarioController",
+    "Method": "ObtenerUsuarios",
+    "RelativePath": "api/Usuario/Usuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.UsuarioController",
+    "Method": "UsuarioPorId",
+    "RelativePath": "api/Usuario/Usuariosporid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

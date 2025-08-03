@@ -1,0 +1,21 @@
+
+
+select,
+select option {
+  background-color: var(--surface-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--surface-color);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+
