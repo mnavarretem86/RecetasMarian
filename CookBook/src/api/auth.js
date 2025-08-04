@@ -1,7 +1,7 @@
 // src/api/auth.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:44317';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5090';
 
 export const ERROR_TYPES = {
   NETWORK_ERROR: 'NETWORK_ERROR',

@@ -1,28 +1,22 @@
 ﻿using CAPA_ENTIDADES;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace CAPA_DATOS
 {
     public class CD_RECETAS
     {
         private readonly CD_CONEXION _CONEXION;
-        DataTable table = new DataTable();
-        SqlCommand cmd = new SqlCommand();
-        SqlDataAdapter da = new SqlDataAdapter();
-
 
         public CD_RECETAS(IConfiguration configuration)
         {
             _CONEXION = new CD_CONEXION(configuration);
         }
 
-        #region InsertarRecetas
+        #region Insertar Receta Completa
         public void GuardarRecetaCompleta(RecetaCompletaDTO receta)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
@@ -43,54 +37,55 @@ namespace CAPA_DATOS
                 cmd.ExecuteNonQuery();
             }
         }
-        #endregion InsertarPRODUCTOS
+        #endregion
 
-        #region ListarRecetas
-
+        #region Listar Recetas Detalladas
         public List<CE_RECETAS_DETALLES> LISTAR_RECETAS()
         {
             List<CE_RECETAS_DETALLES> recetas = new List<CE_RECETAS_DETALLES>();
 
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("UPS_DETALLES_RECETAS", con))
-            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
             {
-                DataTable tabla = new DataTable();
                 cmd.CommandType = CommandType.StoredProcedure;
-                da.Fill(tabla);
+                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
 
-                foreach (DataRow dr in tabla.Rows)
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                 {
-                    recetas.Add(new CE_RECETAS_DETALLES
+                    DataTable tabla = new DataTable();
+                    da.Fill(tabla);
+
+                    foreach (DataRow dr in tabla.Rows)
                     {
-                        RecetaId = Convert.ToInt32(dr["RecetaId"]),
-                        Titulo = dr["Titulo"].ToString(),
-                        DescripcionReceta = dr["DescripcionReceta"].ToString(),
-                        TiempoPreparacion = Convert.ToInt32(dr["TiempoPreparacion"]),
-                        Usuario = dr["Usuario"].ToString(),
-                        NombreCompletoUsuario = dr["NombreCompletoUsuario"].ToString(),
-                        Categoria = dr["Categoria"].ToString(),
-                        Ingredientes = dr["Ingredientes"].ToString(),
-                        Pasos = dr["Pasos"].ToString()
-                    });
+                        recetas.Add(new CE_RECETAS_DETALLES
+                        {
+                            RecetaId = Convert.ToInt32(dr["RecetaId"]),
+                            Titulo = dr["Titulo"].ToString(),
+                            DescripcionReceta = dr["DescripcionReceta"].ToString(),
+                            TiempoPreparacion = Convert.ToInt32(dr["TiempoPreparacion"]),
+                            Usuario = dr["Usuario"].ToString(),
+                            NombreCompletoUsuario = dr["NombreCompletoUsuario"].ToString(),
+                            Categoria = dr["Categoria"].ToString(),
+                            Ingredientes = dr["Ingredientes"].ToString(),
+                            Pasos = dr["Pasos"].ToString()
+                        });
+                    }
                 }
             }
 
             return recetas;
         }
+        #endregion
 
-        #endregion listarRecetas
-
-
-        #region
-
+        #region Actualizar Receta Completa
         public void ActualizarRecetaCompleta(RecetaCompletaDTO receta)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
             using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Accion", SqlDbType.Int ).Value = 2;
+
+                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
                 cmd.Parameters.AddWithValue("@RecetaId", (object)receta.RecetaId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@Titulo", (object)receta.Titulo ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@Descripcion", (object)receta.Descripcion ?? DBNull.Value);
@@ -103,12 +98,9 @@ namespace CAPA_DATOS
                 cmd.ExecuteNonQuery();
             }
         }
-
         #endregion
 
-
-
-        #region Eliminar Receta
+        #region Eliminar Receta (opcional)
         public string ELIMINAR_RECETAS(RecetaCompletaDTO receta)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
@@ -116,17 +108,18 @@ namespace CAPA_DATOS
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@RecetaId", receta.RecetaId);
-                var reader = cmd.ExecuteReader();
-                if (reader.Read()) {
-                    return reader["Mensaje"].ToString();
-                }
-                return "Error al eliminar.";
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader["Mensaje"].ToString();
                     }
+                }
+            }
+
+            return "Error al eliminar.";
         }
-        
         #endregion
-
-
-
     }
 }

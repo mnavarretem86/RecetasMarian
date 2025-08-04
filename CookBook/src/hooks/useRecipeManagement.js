@@ -1,36 +1,69 @@
-// src/hooks/useRecipeManagement.js
 import { useState, useEffect, useCallback } from 'react';
-import { getRecipes, createRecipe, deleteRecipe, getCategories } from '../api/api';
+import { getRecipes, createRecipe, deleteRecipe, getCategories, updateRecipe } from '../api/api';
+
+// FUNCIÓN CORREGIDA para parsear la cadena de ingredientes del API
+const parseIngredientsString = (ingredientesString) => {
+  if (!ingredientesString) return [];
+  try {
+    const json = JSON.parse(ingredientesString);
+    if (Array.isArray(json)) {
+      return json.map(ing => ({
+        id: ing.id, 
+        nombre: ing.nombre || '',
+        cantidad: ing.cantidad || 0,
+        unidad: ing.unidad || ''
+      }));
+    }
+  } catch (e) {
+    console.error("Error al parsear JSON de ingredientes:", e, "Cadena recibida:", ingredientesString);
+  }
+  return [];
+};
+
+// FUNCIÓN CORREGIDA para parsear la cadena de pasos del API
+const parsePasosString = (pasosString) => {
+  if (!pasosString) return [];
+  try {
+    const json = JSON.parse(pasosString);
+    if (Array.isArray(json)) {
+      return json;
+    }
+  } catch (e) {
+    console.error("Error al parsear JSON de pasos:", e, "Cadena recibida:", pasosString);
+  }
+  return [];
+};
 
 const mapApiRecipeToLocal = (apiRecipe) => ({
   id: apiRecipe.recetaId,
   nombre: apiRecipe.titulo,
-  ingredientes: apiRecipe.ingredientes || apiRecipe.descripcionReceta || '',
+  ingredientes: parseIngredientsString(apiRecipe.ingredientes), // Parsea aquí
   tiempo: `${apiRecipe.tiempoPreparacion} min`,
-  dificultad: "Media", 
+  dificultad: apiRecipe.dificultad || "Media",
   categoria: apiRecipe.categoria,
-  categoriaId: apiRecipe.categoriaId, // Asegúrate de tener este campo
+  categoriaId: apiRecipe.categoriaId,
   usuario: apiRecipe.usuario || apiRecipe.nombreCompletoUsuario,
   descripcion: apiRecipe.descripcionReceta || '',
-  pasos: apiRecipe.pasos || ''
+  pasos: parsePasosString(apiRecipe.pasos), // Parsea aquí
 });
 
 export const useRecipeManagement = (user) => {
   const [recipes, setRecipes] = useState([]);
-  const [categories, setCategories] = useState([]); // Nuevo estado para categorías
+  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentRecipe, setCurrentRecipe] = useState(null);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+  // Eliminamos los estados separados, ahora todo está en currentRecipe
 
   const loadData = useCallback(async () => {
     try {
       setIsLoading(true);
       const [recipesResult, categoriesResult] = await Promise.all([
         getRecipes(),
-        getCategories()
+        getCategories(),
       ]);
 
       if (!recipesResult.success) throw new Error(recipesResult.error);
@@ -38,7 +71,6 @@ export const useRecipeManagement = (user) => {
 
       if (!categoriesResult.success) throw new Error(categoriesResult.error);
       setCategories(categoriesResult.data);
-
     } catch (err) {
       console.error('Error al cargar datos:', err);
       setError(err.message || 'Error al cargar datos');
@@ -55,13 +87,13 @@ export const useRecipeManagement = (user) => {
     setCurrentRecipe({
       id: null,
       nombre: '',
-      ingredientes: '',
+      ingredientes: [], // Ahora es un array vacío
       tiempo: '',
       dificultad: 'Media',
       categoriaId: categories[0]?.categoriaId || 1,
       usuarioId: user?.id || 1,
       descripcion: '',
-      pasos: ''
+      pasos: [], // Ahora es un array vacío
     });
     setIsModalOpen(true);
   };
@@ -69,7 +101,7 @@ export const useRecipeManagement = (user) => {
   const handleEditRecipe = (recipe) => {
     setCurrentRecipe({
       ...recipe,
-      tiempo: recipe.tiempo.replace(' min', '')
+      tiempo: recipe.tiempo.replace(' min', ''),
     });
     setIsModalOpen(true);
   };
@@ -80,7 +112,7 @@ export const useRecipeManagement = (user) => {
       setError(null);
       const result = await deleteRecipe(recipe.id);
       if (!result.success) throw new Error(result.error);
-      setRecipes(prev => prev.filter(r => r.id !== recipe.id));
+      setRecipes((prev) => prev.filter((r) => r.id !== recipe.id));
       setIsDeleteConfirmOpen(false);
     } catch (error) {
       console.error('Error al eliminar receta:', error);
@@ -95,7 +127,14 @@ export const useRecipeManagement = (user) => {
       setIsLoading(true);
       setError(null);
       if (!currentRecipe.nombre?.trim()) throw new Error('El nombre de la receta es requerido');
-      const result = await createRecipe(currentRecipe);
+
+      let result;
+      if (currentRecipe.id) {
+        result = await updateRecipe(currentRecipe);
+      } else {
+        result = await createRecipe(currentRecipe);
+      }
+
       if (!result.success) throw new Error(result.error);
       await loadData();
       setIsModalOpen(false);
@@ -107,15 +146,16 @@ export const useRecipeManagement = (user) => {
     }
   };
 
-  const filteredRecipes = recipes.filter(recipe =>
-    recipe.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    recipe.descripcion?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    recipe.categoria?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredRecipes = recipes.filter(
+    (recipe) =>
+      recipe.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      recipe.descripcion?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      recipe.categoria?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return {
     recipes: filteredRecipes,
-    categories, // ¡Ahora esto está disponible!
+    categories,
     isLoading,
     error,
     searchTerm,
@@ -130,5 +170,6 @@ export const useRecipeManagement = (user) => {
     handleEditRecipe,
     handleDeleteRecipe,
     handleSaveRecipe,
+    // Eliminamos los estados separados del return
   };
 };

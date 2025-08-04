@@ -1,30 +1,33 @@
-// src/api/api.js
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:44317';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5090';
 
-const parseIngredientes = (ingredientesRaw) =>
-  ingredientesRaw.split('\n').filter(i => i.trim()).map((ing, index) => ({
-    IngredienteId: 0,
-    orden: index + 1,
-    nombre: ing.trim(),
-    cantidad: 0,
-    unidad: ""
-  }));
-
-const parsePasos = (pasosRaw) =>
-  pasosRaw.split('\n').filter(p => p.trim()).map((paso, index) => ({
+// --- FUNCIONES DE PARSEO CORREGIDAS PARA MATCHEAR EL SP ---
+const parsePasosArray = (pasosArray) =>
+  pasosArray.map((paso, index) => ({
     NumeroPaso: index + 1,
-    descripcion: paso.trim()
+    Descripcion: paso.descripcion.trim(),
   }));
+
+const parseIngredientesArray = (ingredientesArray) =>
+  ingredientesArray.map((ing) => ({
+    IngredienteId: ing.id,
+    Cantidad: parseFloat(ing.cantidad) || 0,
+  }));
+// --- FIN DE FUNCIONES DE PARSEO ---
 
 const handleApiError = (error) => {
   let errorMessage = 'Error desconocido al contactar el servidor';
-  if (error.response) {
-    errorMessage = error.response.data?.message || 'Error del servidor';
+  if (axios.isCancel(error)) {
+    errorMessage = 'La petición ha sido cancelada.';
+  } else if (error.response) {
+    errorMessage = error.response.data?.message || error.response.data?.title || 'Error del servidor';
   } else if (error.request) {
-    errorMessage = 'No hubo respuesta del servidor.';
+    errorMessage = 'No hubo respuesta del servidor. Verifica tu conexión.';
+  } else {
+    errorMessage = error.message;
   }
+  console.error('API Error:', errorMessage, error.response);
   return { success: false, error: errorMessage };
 };
 
@@ -42,7 +45,7 @@ export const getRecipes = async () => {
 
 export const getCategories = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/Categoria/Categorias`, {
+    const response = await axios.get(`${API_URL}/api/Categoria`, {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -51,27 +54,77 @@ export const getCategories = async () => {
   }
 };
 
+export const getIngredients = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/api/Ingrediente`, {
+      headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+      timeout: 10000
+    });
+    return { success: true, data: response.data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const searchIngredients = async (term) => {
+  try {
+    if (!term || term.trim() === '') {
+      return { success: false, error: 'Término de búsqueda no puede estar vacío.' };
+    }
+    const response = await axios.get(`${API_URL}/api/Ingrediente/search?nombre=${encodeURIComponent(term.trim())}`);
+    return { success: true, data: response.data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 export const createRecipe = async (recipeData) => {
   try {
-    const ingredientesArray = parseIngredientes(recipeData.ingredientes);
-    const pasosArray = parsePasos(recipeData.pasos);
+    const pasosArray = parsePasosArray(recipeData.pasos);
+    const ingredientesArray = parseIngredientesArray(recipeData.ingredientes);
+
     const requestData = {
-      recetaId: 0,
-      titulo: recipeData.nombre.trim(),
-      descripcion: recipeData.descripcion.trim(),
-      tiempoPreparacion: parseInt(recipeData.tiempo) || 0,
-      usuarioId: recipeData.usuarioId || 1,
-      categoriaId: recipeData.categoriaId || 1,
-      jsonIngredientes: JSON.stringify(ingredientesArray),
-      jsonPasos: JSON.stringify(pasosArray)
+      Titulo: recipeData.nombre.trim(),
+      Descripcion: recipeData.descripcion.trim(),
+      TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
+      UsuarioId: recipeData.usuarioId || 1,
+      CategoriaId: recipeData.categoriaId || 1,
+      JsonIngredientes: JSON.stringify(ingredientesArray),
+      JsonPasos: JSON.stringify(pasosArray)
     };
+
     const response = await axios.post(`${API_URL}/api/RECETAS/create`, requestData, {
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
       timeout: 10000
     });
     return { success: true, data: response.data };
   } catch (error) {
-    console.error('Error en createRecipe:', error);
+    return handleApiError(error);
+  }
+};
+
+export const updateRecipe = async (recipeData) => {
+  try {
+    const pasosArray = parsePasosArray(recipeData.pasos);
+    const ingredientesArray = parseIngredientesArray(recipeData.ingredientes);
+
+    const requestData = {
+      RecetaId: recipeData.id,
+      Titulo: recipeData.nombre.trim(),
+      Descripcion: recipeData.descripcion.trim(),
+      TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
+      UsuarioId: recipeData.usuarioId || 1,
+      CategoriaId: recipeData.categoriaId || 1,
+      JsonIngredientes: JSON.stringify(ingredientesArray),
+      JsonPasos: JSON.stringify(pasosArray)
+    };
+
+    const response = await axios.put(`${API_URL}/api/RECETAS/update`, requestData, {
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+      timeout: 10000
+    });
+    return { success: true, data: response.data };
+  } catch (error) {
     return handleApiError(error);
   }
 };
@@ -89,7 +142,6 @@ export const deleteRecipe = async (recipeId) => {
     }
     return handleApiError({ response });
   } catch (error) {
-    console.error('Error en deleteRecipe:', { response: error.response?.data });
     return handleApiError(error);
   }
 };

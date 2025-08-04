@@ -8,7 +8,6 @@ namespace CookBook.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class RECETASController : ControllerBase
     {
         private readonly CN_RECETA _CNRecetas;
@@ -37,9 +36,7 @@ namespace CookBook.API.Controllers
             {
                 return BadRequest(new { error = ex.Message });
             }
-
         }
-
 
         [HttpPut("update")]
         public IActionResult ActualizarReceta([FromBody] RecetaCompletaDTO receta)
@@ -53,27 +50,6 @@ namespace CookBook.API.Controllers
             {
                 return BadRequest(new { error = ex.Message });
             }
-
         }
-
-        [HttpDelete("delete")]
-        public IActionResult EliminarRecetas(int id)
-        {
-
-            var lista = new RecetaCompletaDTO { RecetaId = id };
-            string mensaje = _CNRecetas.EliminarRecetas(lista);
-            if (mensaje.Contains("Eliminada"))
-            {
-                return Ok(new { success = true, message = mensaje });
-            }
-            else {
-           
-              return BadRequest(new {  success = false, message = mensaje } );
-            }
-        }
-
-
-     
-
     }
 }

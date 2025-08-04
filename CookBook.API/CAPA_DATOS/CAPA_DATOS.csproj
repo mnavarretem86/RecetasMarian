@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="CD_CATEGORIA.cs" />
     <Compile Include="CD_CONEXION.cs" />
+    <Compile Include="CD_INGREDIENTE.cs" />
     <Compile Include="CD_RECETAS.cs" />
     <Compile Include="CD_USUARIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

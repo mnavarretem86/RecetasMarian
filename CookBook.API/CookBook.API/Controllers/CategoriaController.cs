@@ -1,8 +1,8 @@
-﻿using CAPA_DATOS;
-using CAPA_ENTIDADES;
+﻿using CAPA_ENTIDADES;
 using CAPA_NEGOCIO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace CookBook.API.Controllers
 {
@@ -14,44 +14,51 @@ namespace CookBook.API.Controllers
 
         public CategoriaController(IConfiguration configuration)
         {
-            _CNCategoria= new CN_CATEGORIA(configuration);
+            _CNCategoria = new CN_CATEGORIA(configuration);
         }
 
-        [HttpGet("Categorias")]
-        public IActionResult ObtenerCategoria()
+        [HttpGet]
+        public IActionResult ObtenerCategorias()
         {
-            var Cat = _CNCategoria.ListarcategoriaDetalle();
-            return Ok(Cat);
+            var categorias = _CNCategoria.ListarCategorias();
+            return Ok(categorias);
         }
 
-
-        [HttpPost("Guardar  categorias")]
-        public IActionResult GuardarCategoria([FromBody] CE_CATEGORIA receta)
+        [HttpPost]
+        public IActionResult GuardarCategoria([FromBody] CE_CATEGORIA categoria)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             try
             {
-                _CNCategoria.cn_GuardarCategoriaCompleta(receta);
-                return Ok(new { mensaje = "Categoria procesada correctamente." });
+                _CNCategoria.GuardarCategoria(categoria);
+                return Created("", new { mensaje = "Categoría creada correctamente." });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
-
         }
-        [HttpPut(" Actualizar Categorias")]
-        public IActionResult ActualizarCategoria([FromBody] CE_CATEGORIA receta)
+
+        [HttpPut("{id}")]
+        public IActionResult ActualizarCategoria(int id, [FromBody] CE_CATEGORIA categoria)
         {
+            if (!ModelState.IsValid)    
+                return BadRequest(ModelState);
+
+            if (categoria.CategoriaId != id)
+                return BadRequest(new { error = "El ID de la categoría no coincide." });
+
             try
             {
-                _CNCategoria.cn_ActualizarCategoriaCompleta(receta);
-                return Ok(new { mensaje = "Categoria procesada correctamente." });
+                _CNCategoria.ActualizarCategoria(categoria);
+                return Ok(new { mensaje = "Categoría actualizada correctamente." });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
-
         }
     }
 }

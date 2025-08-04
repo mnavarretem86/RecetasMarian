@@ -1,12 +1,105 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|c:\\users\\mnavarrete\\desktop\\recetasmarian-main\\cookbook.api\\capa_datos\\cd_recetas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|solutionrelative:capa_datos\\cd_recetas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|c:\\users\\mnavarrete\\desktop\\recetasmarian-main\\cookbook.api\\capa_entidades\\ce_recetas_detalles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|solutionrelative:capa_entidades\\ce_recetas_detalles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E05A0F6-C84F-4379-979C-448C40EBF872}|CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj|c:\\users\\mnavarrete\\desktop\\recetasmarian-main\\cookbook.api\\capa_negocio\\cn_receta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E05A0F6-C84F-4379-979C-448C40EBF872}|CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj|solutionrelative:capa_negocio\\cn_receta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|c:\\users\\mnavarrete\\desktop\\recetasmarian-main\\cookbook.api\\cookbook.api\\controllers\\recetacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|solutionrelative:cookbook.api\\controllers\\recetacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|c:\\users\\mnavarrete\\desktop\\recetasmarian-main\\cookbook.api\\capa_entidades\\ce_categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|solutionrelative:capa_entidades\\ce_categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CD_RECETAS.cs",
+              "DocumentMoniker": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CD_RECETAS.cs",
+              "RelativeDocumentMoniker": "CAPA_DATOS\\CD_RECETAS.cs",
+              "ToolTip": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CD_RECETAS.cs",
+              "RelativeToolTip": "CAPA_DATOS\\CD_RECETAS.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAqwH0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T17:12:09.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CN_RECETA.cs",
+              "DocumentMoniker": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CN_RECETA.cs",
+              "RelativeDocumentMoniker": "CAPA_NEGOCIO\\CN_RECETA.cs",
+              "ToolTip": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CN_RECETA.cs",
+              "RelativeToolTip": "CAPA_NEGOCIO\\CN_RECETA.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T17:11:22.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CE_RECETAS_DETALLES.cs",
+              "DocumentMoniker": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CE_RECETAS_DETALLES.cs",
+              "RelativeDocumentMoniker": "CAPA_ENTIDADES\\CE_RECETAS_DETALLES.cs",
+              "ToolTip": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CE_RECETAS_DETALLES.cs",
+              "RelativeToolTip": "CAPA_ENTIDADES\\CE_RECETAS_DETALLES.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T17:10:11.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CE_CATEGORIA.cs",
+              "DocumentMoniker": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CE_CATEGORIA.cs",
+              "RelativeDocumentMoniker": "CAPA_ENTIDADES\\CE_CATEGORIA.cs",
+              "ToolTip": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CE_CATEGORIA.cs",
+              "RelativeToolTip": "CAPA_ENTIDADES\\CE_CATEGORIA.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T17:10:09.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RecetaController.cs",
+              "DocumentMoniker": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\Controllers\\RecetaController.cs",
+              "RelativeDocumentMoniker": "CookBook.API\\Controllers\\RecetaController.cs",
+              "ToolTip": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\Controllers\\RecetaController.cs",
+              "RelativeToolTip": "CookBook.API\\Controllers\\RecetaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T17:09:36.871Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,21 +1,257 @@
+/* --- Colores y Variables (ajusta si es necesario) --- */
+:root {
+  --primary-color: #6200ea;
+  --primary-color-hover: #7b29ec;
+  --danger-color: #e53935;
+  --danger-color-hover: #c62828;
+  --surface-color: #333;
+  --surface-color-light: #444;
+  --background-color: #1e1e1e;
+  --text-color-primary: #f0f0f0;
+  --text-color-secondary: #aaa;
+  --border-color: #666;
+}
+
+/* --- Estilos Generales --- */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color-primary);
+}
+
+.dashboard {
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* --- Cabecera --- */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.user-info-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+}
+
+.username {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  gap: 12px;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color-primary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: var(--surface-color);
+}
+
+/* --- Botón "Agregar Receta" --- */
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+  background-color: var(--primary-color-hover);
+}
 
 
-select,
-select option {
+/* --- Sección de búsqueda --- */
+.search-bar-container {
+  margin-bottom: 1.5rem;
+}
+
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid var(--border-color);
   background-color: var(--surface-color);
   color: var(--text-color-primary);
-  border: 1px solid var(--surface-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-bar input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
+}
+
+.search-bar svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color-secondary);
+}
+
+/* --- Sección de filtros --- */
+.filter-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  gap: 20rem;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+}
+
+.filter-label svg {
+  color: var(--primary-color);
+}
+
+.filter-select {
+  background-color: var(--surface-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color);
   padding: 10px;
   border-radius: 6px;
   font-size: 1rem;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  cursor: pointer;
+  min-width: 200px;
 }
 
-select:focus {
+.filter-select:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
 }
 
+.clear-filters-btn {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+.clear-filters-btn:hover {
+  background-color: var(--danger-color-hover);
+}
+
+/* --- Sección de paginación --- */
+.pagination-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.entries-per-page {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+}
+
+.entries-select {
+  background-color: var(--surface-color);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  width: 60px;
+  text-align: center;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.page-btn.arrow-btn {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color-primary);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 30px;
+  transition: background-color 0.3s;
+}
+
+.page-btn.arrow-btn:hover {
+  background-color: var(--surface-color-light);
+}
+
+.page-btn.arrow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+}

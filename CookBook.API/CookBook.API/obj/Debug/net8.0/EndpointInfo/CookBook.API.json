@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Categoria/Categorias": {
+    "/api/Categoria": {
       "get": {
         "tags": [
           "Categoria"
@@ -15,9 +15,7 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/api/Categoria/Guardar  categorias": {
+      },
       "post": {
         "tags": [
           "Categoria"
@@ -48,10 +46,21 @@
         }
       }
     },
-    "/api/Categoria/ Actualizar Categorias": {
+    "/api/Categoria/{id}": {
       "put": {
         "tags": [
           "Categoria"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -68,6 +77,89 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CE_CATEGORIA"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ingrediente": {
+      "get": {
+        "tags": [
+          "Ingrediente"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ingrediente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ingrediente/{id}": {
+      "put": {
+        "tags": [
+          "Ingrediente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_INGREDIENTE"
               }
             }
           }
@@ -172,28 +264,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/RECETAS/delete": {
-      "delete": {
-        "tags": [
-          "RECETAS"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -320,6 +390,44 @@
             "format": "int32"
           },
           "nombre": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "estadoId": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CE_INGREDIENTE": {
+        "type": "object",
+        "properties": {
+          "ingredienteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
             "type": "string",
             "nullable": true
           },
@@ -327,17 +435,23 @@
             "type": "string",
             "nullable": true
           },
-          "fechaCreacion": {
+          "unidad": {
             "type": "string",
-            "format": "date-time"
-          },
-          "fechaModificacion": {
-            "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "estadoId": {
             "type": "integer",
             "format": "int32"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false

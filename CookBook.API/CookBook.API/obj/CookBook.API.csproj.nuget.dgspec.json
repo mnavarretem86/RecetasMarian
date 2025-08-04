@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\CookBook.API.csproj": {}
+    "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\CookBook.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj": {
+    "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj",
+        "projectUniqueName": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj",
         "projectName": "CAPA_DATOS",
-        "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj",
+        "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net48": {
             "projectReferences": {
-              "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
-                "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
+              "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
+                "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
               }
             }
           }
@@ -24,11 +24,11 @@
         "net48": {}
       }
     },
-    "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
+    "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj",
+        "projectUniqueName": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj",
         "projectName": "CAPA_ENTIDADES",
-        "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj",
+        "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net48": {
@@ -40,20 +40,20 @@
         "net48": {}
       }
     },
-    "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
+    "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
+        "projectUniqueName": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
         "projectName": "CAPA_NEGOCIO",
-        "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
+        "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj",
         "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net48": {
             "projectReferences": {
-              "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj": {
-                "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj"
+              "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj": {
+                "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_DATOS\\CAPA_DATOS.csproj"
               },
-              "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
-                "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
+              "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
+                "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
               }
             }
           }
@@ -63,20 +63,20 @@
         "net48": {}
       }
     },
-    "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\CookBook.API.csproj": {
+    "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\CookBook.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\CookBook.API.csproj",
+        "projectUniqueName": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\CookBook.API.csproj",
         "projectName": "CookBook.API",
-        "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\CookBook.API.csproj",
-        "packagesPath": "C:\\Users\\USUARIO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\obj\\",
+        "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\CookBook.API.csproj",
+        "packagesPath": "C:\\Users\\mnavarrete\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CookBook.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\USUARIO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mnavarrete\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -91,11 +91,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
-                "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
+              "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj": {
+                "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj"
               },
-              "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
-                "projectPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
+              "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj": {
+                "projectPath": "C:\\Users\\mnavarrete\\Desktop\\RecetasMarian-main\\CookBook.API\\CAPA_NEGOCIO\\CAPA_NEGOCIO.csproj"
               }
             }
           }
@@ -110,7 +110,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -166,7 +166,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

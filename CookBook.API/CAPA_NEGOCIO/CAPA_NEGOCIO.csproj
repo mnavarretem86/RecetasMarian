@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CN_CATEGORIA.cs" />
+    <Compile Include="CN_INGREDIENTE.cs" />
     <Compile Include="CN_RECETA.cs" />
     <Compile Include="CN_USUARIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
