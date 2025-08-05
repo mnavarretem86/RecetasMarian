@@ -1,15 +1,13 @@
-/* Variables para el tema oscuro */
 :root {
   --background-color: #121212;
   --surface-color: #1e1e1e;
   --text-color-primary: #e0e0e0;
   --text-color-secondary: #a0a0a0;
-  --primary-color: #bb86fc; /* Color de acento */
+  --primary-color: #bb86fc; 
   --error-color: #cf6679;
   --success-color: #66bb6a;
 }
 
-/* Estilos del modal y formulario base */
 .modal-content {
   background: var(--surface-color);
   padding: 2rem;
@@ -30,7 +28,6 @@
   padding-bottom: 0.5rem;
 }
 
-/* Nuevo estilo para el indicador de pasos */
 .step-indicator {
   display: flex;
   justify-content: center;
@@ -124,7 +121,6 @@ select option {
   color: var(--text-color-primary) !important;
 }
 
-/* Estilos de la búsqueda de ingredientes */
 .ingredients-section {
   border-top: 1px solid #333;
   padding-top: 1.5rem;
@@ -168,7 +164,6 @@ select option {
   background-color: #444;
 }
 
-/* Estilos del formulario de ingrediente seleccionado */
 .selected-ingredient-form {
   border-left: 4px solid var(--primary-color);
   padding-left: 1rem;
@@ -178,7 +173,6 @@ select option {
   padding: 1rem;
 }
 
-/* Estilos de los botones */
 .add-ingredient-btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -196,7 +190,6 @@ select option {
   background-color: #5aa65e;
 }
 
-/* Lista de ingredientes añadidos */
 .added-ingredients-list ul {
   list-style: none;
   padding: 0;
@@ -234,7 +227,6 @@ select option {
   background: #b75263;
 }
 
-/* Botones de acción */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -272,17 +264,13 @@ select option {
   cursor: not-allowed;
 }
 
-/* ------------------------------------------- */
-/* AJUSTES PARA LA NAVEGACIÓN DEL FORMULARIO */
-/* ------------------------------------------- */
 .form-navigation {
   display: flex;
-  justify-content: space-between; /* Alinea los botones de "Cancelar" y el resto en extremos opuestos */
+  justify-content: space-between; 
   align-items: center;
   margin-top: 1.5rem;
 }
 
-/* Unificamos el estilo de todos los botones de navegación */
 .form-navigation button {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -294,7 +282,6 @@ select option {
   color: var(--text-color-primary);
 }
 
-/* Estilos específicos para cada botón */
 .form-navigation .cancel-btn {
   background-color: #444;
 }
@@ -304,7 +291,7 @@ select option {
 
 .form-navigation .back-btn {
   background-color: #444;
-  margin-right: 1rem; /* Separa el botón "Volver" del botón "Siguiente" */
+  margin-right: 1rem; 
 }
 .form-navigation .back-btn:hover {
   background-color: #555;
@@ -325,13 +312,11 @@ select option {
   opacity: 0.6;
 }
 
-/* Agrupamos los botones "Volver", "Siguiente" y "Guardar" para que "Cancelar" se quede solo a la izquierda */
 .form-navigation .right-buttons {
   display: flex;
-  gap: 1rem; /* Espacio entre los botones del grupo derecho */
+  gap: 1rem; 
 }
 
-/* Mensajes de estado */
 .loading-message, .error-message {
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;

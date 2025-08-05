@@ -38,7 +38,6 @@ const RecipeTable = ({ recipes, onEdit, user }) => {
                 <strong>Descripción:</strong> {recipe.descripcion}
               </p>
 
-              {/* Lista de Ingredientes (CORREGIDA) */}
               <div className="card-section">
                 <strong>Ingredientes:</strong>
                 {recipe.ingredientes && Array.isArray(recipe.ingredientes) && recipe.ingredientes.length > 0 ? (
@@ -54,7 +53,6 @@ const RecipeTable = ({ recipes, onEdit, user }) => {
                 )}
               </div>
 
-              {/* Lista de Pasos (CORREGIDA) */}
               <div className="card-section">
                 <strong>Pasos:</strong>
                 {recipe.pasos && Array.isArray(recipe.pasos) && recipe.pasos.length > 0 ? (

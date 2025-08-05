@@ -32,7 +32,6 @@ const RecipeForm = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // La dificultad ahora se maneja como string, no como número
     const newValue = name === 'tiempo' || name === 'categoriaId' ? Number(value) : value; 
     setCurrentRecipe((prev) => ({
       ...prev,

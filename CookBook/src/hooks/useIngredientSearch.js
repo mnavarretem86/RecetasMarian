@@ -9,7 +9,6 @@ export const useIngredientSearch = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchError, setSearchError] = useState(null);
 
-  // Carga todos los ingredientes una sola vez al montar el componente
   useEffect(() => {
     const fetchAllIngredients = async () => {
       setIsLoading(true);
@@ -32,9 +31,8 @@ export const useIngredientSearch = () => {
     fetchAllIngredients();
   }, []);
 
-  // Filtra los ingredientes localmente cada vez que cambia el término de búsqueda
   useEffect(() => {
-    if (!searchTerm || searchTerm.length < 2) { // Puedes ajustar la longitud mínima
+    if (!searchTerm || searchTerm.length < 2) { 
       setSearchResults([]);
       return;
     }

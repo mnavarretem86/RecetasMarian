@@ -1,6 +1,4 @@
-/* IngredientManager.css */
 
-/* Contenedor principal en fila con espacio entre columnas */
 .ingredients-container {
     display: flex;
     gap: 1.5rem;
@@ -8,7 +6,6 @@
     margin-top: 1rem;
   }
   
-  /* Formulario de agregar ingrediente */
   .ingredient-form {
     flex: 1 1 40%;
     min-width: 300px;
@@ -18,7 +15,6 @@
     box-shadow: 0 2px 6px rgba(0,0,0,0.5);
   }
   
-  /* Título dentro del formulario */
   .ingredient-form > label {
     font-weight: bold;
     color: var(--text-color-primary);
@@ -26,7 +22,6 @@
     margin-bottom: 0.5rem;
   }
   
-  /* Inputs y textarea dentro del formulario */
   .ingredient-form input[type="text"],
   .ingredient-form input[type="number"] {
     width: 100%;
@@ -48,7 +43,6 @@
     box-shadow: 0 0 6px var(--primary-color);
   }
   
-  /* Botón Añadir ingrediente */
   .add-ingredient-btn {
     width: 100%;
     margin-top: 1rem;
@@ -66,7 +60,6 @@
     background-color: #5aa65e;
   }
   
-  /* Lista desplegable de búsqueda */
   .search-results {
     position: relative;
     max-height: 140px;
@@ -97,7 +90,6 @@
     border-bottom: none;
   }
   
-  /* Tabla ingredientes añadidos */
   .ingredients-table-wrapper {
     flex: 1 1 55%;
     min-width: 350px;
@@ -114,7 +106,6 @@
     margin-bottom: 0.5rem;
   }
   
-  /* Tabla con estilos */
   .ingredients-table {
     width: 100%;
     border-collapse: collapse;
@@ -149,10 +140,9 @@
     width: 50px;
   }
   
-  /* Botón eliminar ingrediente */
   .remove-ingredient-btn {
     background-color: var(--error-color);
-    border: none;/* Contenedor principal de los ingredientes */
+    border: none;
 .ingredient-manager-container {
   display: flex;
   flex-direction: column;
@@ -208,13 +198,12 @@
   margin-bottom: 1rem;
 }
 
-/* Estilos para el botón de añadir */
 .add-ingredient-btn {
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background-color: #66bb6a; /* Color de éxito */
+  background-color: #66bb6a; 
   color: #121212;
   font-weight: bold;
   font-size: 1rem;
@@ -226,7 +215,6 @@
   background-color: #5aa65e;
 }
 
-/* Estilos de la lista de ingredientes añadidos */
 .ingredient-item {
   display: flex;
   justify-content: space-between;
@@ -242,9 +230,8 @@
   color: #fff;
 }
 
-/* Estilos para el botón de quitar (la "x") */
 .remove-ingredient-btn {
-  background-color: #cf6679; /* Color de error */
+  background-color: #cf6679; 
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -285,7 +272,6 @@
   color: #cf6679;
 }
 
-/* Estilos del buscador (autocomplete) */
 .search-results {
   list-style: none;
   padding: 0;
@@ -294,7 +280,7 @@
   border: 1px solid #444;
   border-top: none;
   border-radius: 0 0 8px 8px;
-  position: absolute; /* Para que aparezca debajo del input */
+  position: absolute; 
   z-index: 10;
   width: 100%;
   max-height: 200px;
@@ -330,7 +316,6 @@
     background-color: #b75263;
   }
   
-  /* Mensaje cuando no hay ingredientes */
   .ingredients-table-wrapper p {
     color: var(--text-color-secondary);
     margin-top: 0.5rem;

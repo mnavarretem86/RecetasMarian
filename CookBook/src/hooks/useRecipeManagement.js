@@ -22,7 +22,6 @@ const parseIngredientsString = (ingredientesString) => {
   return [];
 };
 
-// FUNCIÓN CORREGIDA para parsear la cadena de pasos del API
 const parsePasosString = (pasosString) => {
   if (!pasosString) return [];
   try {
@@ -39,14 +38,14 @@ const parsePasosString = (pasosString) => {
 const mapApiRecipeToLocal = (apiRecipe) => ({
   id: apiRecipe.recetaId,
   nombre: apiRecipe.titulo,
-  ingredientes: parseIngredientsString(apiRecipe.ingredientes), // Parsea aquí
+  ingredientes: parseIngredientsString(apiRecipe.ingredientes),
   tiempo: `${apiRecipe.tiempoPreparacion} min`,
   dificultad: apiRecipe.dificultad || "Media",
   categoria: apiRecipe.categoria,
   categoriaId: apiRecipe.categoriaId,
   usuario: apiRecipe.usuario || apiRecipe.nombreCompletoUsuario,
   descripcion: apiRecipe.descripcionReceta || '',
-  pasos: parsePasosString(apiRecipe.pasos), // Parsea aquí
+  pasos: parsePasosString(apiRecipe.pasos),
 });
 
 export const useRecipeManagement = (user) => {
@@ -58,7 +57,6 @@ export const useRecipeManagement = (user) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentRecipe, setCurrentRecipe] = useState(null);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-  // Eliminamos los estados separados, ahora todo está en currentRecipe
 
   const loadData = useCallback(async () => {
     try {
@@ -89,13 +87,13 @@ export const useRecipeManagement = (user) => {
     setCurrentRecipe({
       id: null,
       nombre: '',
-      ingredientes: [], // Ahora es un array vacío
+      ingredientes: [], 
       tiempo: '',
-      dificultad: 'Media', // <-- Corrección aquí: valor inicial en string
+      dificultad: 'Media', 
       categoriaId: categories[0]?.categoriaId || 1,
       usuarioId: user?.id || 1,
       descripcion: '',
-      pasos: [], // Ahora es un array vacío
+      pasos: [], 
     });
     setIsModalOpen(true);
   };
@@ -172,6 +170,5 @@ export const useRecipeManagement = (user) => {
     handleEditRecipe,
     handleDeleteRecipe,
     handleSaveRecipe,
-    // Eliminamos los estados separados del return
   };
 };
