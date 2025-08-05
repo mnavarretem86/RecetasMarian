@@ -31,6 +31,31 @@ namespace CAPA_DATOS
                 cmd.Parameters.AddWithValue("@TiempoPreparacion", (object)receta.TiempoPreparacion ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@UsuarioId", (object)receta.UsuarioId ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@CategoriaId", (object)receta.CategoriaId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@DificultadId", (object)receta.DificultadId ?? DBNull.Value); // NUEVO
+                cmd.Parameters.AddWithValue("@JsonIngredientes", (object)receta.JsonIngredientes ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@JsonPasos", (object)receta.JsonPasos ?? DBNull.Value);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+        #endregion
+
+        #region Actualizar Receta Completa
+        public void ActualizarRecetaCompleta(RecetaCompletaDTO receta)
+        {
+            using (SqlConnection con = _CONEXION.AbrirConexion())
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                cmd.Parameters.AddWithValue("@RecetaId", (object)receta.RecetaId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Titulo", (object)receta.Titulo ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Descripcion", (object)receta.Descripcion ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@TiempoPreparacion", (object)receta.TiempoPreparacion ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@UsuarioId", (object)receta.UsuarioId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@CategoriaId", (object)receta.CategoriaId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@DificultadId", (object)receta.DificultadId ?? DBNull.Value); // NUEVO
                 cmd.Parameters.AddWithValue("@JsonIngredientes", (object)receta.JsonIngredientes ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@JsonPasos", (object)receta.JsonPasos ?? DBNull.Value);
 
@@ -66,6 +91,7 @@ namespace CAPA_DATOS
                             Usuario = dr["Usuario"].ToString(),
                             NombreCompletoUsuario = dr["NombreCompletoUsuario"].ToString(),
                             Categoria = dr["Categoria"].ToString(),
+                            Dificultad = dr["Dificultad"].ToString(), 
                             Ingredientes = dr["Ingredientes"].ToString(),
                             Pasos = dr["Pasos"].ToString()
                         });
@@ -74,29 +100,6 @@ namespace CAPA_DATOS
             }
 
             return recetas;
-        }
-        #endregion
-
-        #region Actualizar Receta Completa
-        public void ActualizarRecetaCompleta(RecetaCompletaDTO receta)
-        {
-            using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
-                cmd.Parameters.AddWithValue("@RecetaId", (object)receta.RecetaId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@Titulo", (object)receta.Titulo ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@Descripcion", (object)receta.Descripcion ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@TiempoPreparacion", (object)receta.TiempoPreparacion ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@UsuarioId", (object)receta.UsuarioId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@CategoriaId", (object)receta.CategoriaId ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@JsonIngredientes", (object)receta.JsonIngredientes ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@JsonPasos", (object)receta.JsonPasos ?? DBNull.Value);
-
-                cmd.ExecuteNonQuery();
-            }
         }
         #endregion
 

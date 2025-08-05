@@ -16,6 +16,7 @@ namespace CAPA_ENTIDADES
         public int? TiempoPreparacion { get; set; }
         public int? UsuarioId { get; set; }
         public int? CategoriaId { get; set; }
+        public int? DificultadId { get; set; } 
         public string JsonIngredientes { get; set; }
         public string JsonPasos { get; set; }
 

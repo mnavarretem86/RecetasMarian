@@ -1,8 +1,9 @@
+// api/api.js
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5090';
 
-// --- FUNCIONES DE PARSEO CORREGIDAS PARA MATCHEAR EL SP ---
+
 const parsePasosArray = (pasosArray) =>
   pasosArray.map((paso, index) => ({
     NumeroPaso: index + 1,
@@ -14,7 +15,18 @@ const parseIngredientesArray = (ingredientesArray) =>
     IngredienteId: ing.id,
     Cantidad: parseFloat(ing.cantidad) || 0,
   }));
-// --- FIN DE FUNCIONES DE PARSEO ---
+
+const mapDifficultyNameToId = (difficultyName) => {
+  switch (difficultyName) {
+    case 'Fácil':
+      return 1;
+    case 'Media':
+      return 2;
+    case 'Difícil':
+    default: 
+      return 3;
+  }
+};
 
 const handleApiError = (error) => {
   let errorMessage = 'Error desconocido al contactar el servidor';
@@ -89,7 +101,8 @@ export const createRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
-      JsonIngredientes: JSON.stringify(ingredientesArray),
+      DificultadId: mapDifficultyNameToId(recipeData.dificultad), 
+      JsonIngredientes: JSON.stringify(ingredientesArray), 
       JsonPasos: JSON.stringify(pasosArray)
     };
 
@@ -115,6 +128,7 @@ export const updateRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
+      DificultadId: mapDifficultyNameToId(recipeData.dificultad), // <-- Corrección aquí
       JsonIngredientes: JSON.stringify(ingredientesArray),
       JsonPasos: JSON.stringify(pasosArray)
     };

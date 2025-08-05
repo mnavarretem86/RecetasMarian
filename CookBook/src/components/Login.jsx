@@ -23,13 +23,16 @@ const Login = ({ onLogin }) => {
       const result = await login({ email, contrasena: password });
       
       if (!result.success) {
-        setError(result.error);
-        if (result.type === 'CREDENTIALS_ERROR') {
-          setPassword('');
-          document.getElementById('password')?.focus();
-        }
-        return;
-      }
+  if (result.type === 'CREDENTIALS_ERROR') {
+    setError('El correo o la contraseña ingresados son incorrectos.');
+    setPassword('');
+    document.getElementById('password')?.focus();
+  } else {
+    setError(result.error);
+  }
+  return;
+}
+
       
       if (onLogin) onLogin(result.user);
       navigate('/dashboard');

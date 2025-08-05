@@ -1,3 +1,5 @@
+// hooks/useRecipeManagement.js
+
 import { useState, useEffect, useCallback } from 'react';
 import { getRecipes, createRecipe, deleteRecipe, getCategories, updateRecipe } from '../api/api';
 
@@ -8,7 +10,7 @@ const parseIngredientsString = (ingredientesString) => {
     const json = JSON.parse(ingredientesString);
     if (Array.isArray(json)) {
       return json.map(ing => ({
-        id: ing.id, 
+        id: ing.id,
         nombre: ing.nombre || '',
         cantidad: ing.cantidad || 0,
         unidad: ing.unidad || ''
@@ -89,7 +91,7 @@ export const useRecipeManagement = (user) => {
       nombre: '',
       ingredientes: [], // Ahora es un array vacío
       tiempo: '',
-      dificultad: 'Media',
+      dificultad: 'Media', // <-- Corrección aquí: valor inicial en string
       categoriaId: categories[0]?.categoriaId || 1,
       usuarioId: user?.id || 1,
       descripcion: '',

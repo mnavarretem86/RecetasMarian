@@ -487,6 +487,10 @@
             "type": "string",
             "nullable": true
           },
+          "dificultad": {
+            "type": "string",
+            "nullable": true
+          },
           "ingredientes": {
             "type": "string",
             "nullable": true
@@ -588,6 +592,11 @@
             "nullable": true
           },
           "categoriaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dificultadId": {
             "type": "integer",
             "format": "int32",
             "nullable": true

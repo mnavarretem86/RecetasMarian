@@ -11,6 +11,8 @@ namespace CAPA_ENTIDADES
         public string Usuario { get; set; }
         public string NombreCompletoUsuario { get; set; }
         public string Categoria { get; set; }
+        public string Dificultad { get; set; }
+
         public string Ingredientes { get; set; }
         public string Pasos { get; set; }
     }

@@ -91,7 +91,7 @@ namespace CookBook.API.Controllers
                EstadoID = request.EstadoID
                 };
 
-            _CNUsuario.CN_ActualizarUsuario(usuario); // Llama al método de actualización
+            _CNUsuario.CN_ActualizarUsuario(usuario); 
             return Ok(new { mensaje = "Usuario procesado correctamente." });
         }
        catch (Exception ex)
