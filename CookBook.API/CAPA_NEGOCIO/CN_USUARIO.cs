@@ -16,22 +16,32 @@ namespace CAPA_NEGOCIO
 
         public List<CE_USUARIO> ListarUsuarios()
         {
-            return _CDUsuario.ListarUsuarios(); 
+            return _CDUsuario.ListarUsuarios();
         }
 
         public CE_USUARIO ObtenerUsuarioPorId(int id)
         {
-            return _CDUsuario.ObtenerUsuarioPorId(id); 
+            return _CDUsuario.ObtenerUsuarioPorId(id);
         }
 
         public void CrearUsuario(CE_USUARIO usuario)
         {
-            _CDUsuario.InsertarUsuario(usuario); 
+            if (!string.IsNullOrWhiteSpace(usuario.Contrasena))
+            {
+                usuario.Contrasena = BCrypt.Net.BCrypt.HashPassword(usuario.Contrasena);
+            }
+
+            _CDUsuario.InsertarUsuario(usuario);
         }
 
         public void ActualizarUsuario(CE_USUARIO usuario)
         {
-            _CDUsuario.ActualizarUsuario(usuario); 
+            if (!string.IsNullOrWhiteSpace(usuario.Contrasena))
+            {
+                usuario.Contrasena = BCrypt.Net.BCrypt.HashPassword(usuario.Contrasena);
+            }
+
+            _CDUsuario.ActualizarUsuario(usuario);
         }
     }
 }

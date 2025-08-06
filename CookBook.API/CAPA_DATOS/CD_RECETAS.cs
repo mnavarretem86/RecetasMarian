@@ -20,7 +20,7 @@ namespace CAPA_DATOS
         public void GuardarRecetaCompleta(RecetaCompletaDTO receta)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -44,7 +44,7 @@ namespace CAPA_DATOS
         public void ActualizarRecetaCompleta(RecetaCompletaDTO receta)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -70,7 +70,7 @@ namespace CAPA_DATOS
             List<CE_RECETAS_DETALLES> recetas = new List<CE_RECETAS_DETALLES>();
 
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_RECETA_COMPLETA", con))
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;

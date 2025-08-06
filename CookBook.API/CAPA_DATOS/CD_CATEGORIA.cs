@@ -20,7 +20,7 @@ namespace CAPA_DATOS
         public void InsertarCategoria(CE_CATEGORIA obj)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesCategoria", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESCATEGORIA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
@@ -38,7 +38,7 @@ namespace CAPA_DATOS
             List<CE_CATEGORIA> categorias = new List<CE_CATEGORIA>();
 
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesCategoria", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESCATEGORIA", con))
             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -69,7 +69,7 @@ namespace CAPA_DATOS
         public void ActualizarCategoria(CE_CATEGORIA obj)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesCategoria", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESCATEGORIA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;

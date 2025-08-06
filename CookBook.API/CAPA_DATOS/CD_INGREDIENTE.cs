@@ -20,7 +20,7 @@ namespace CAPA_DATOS
         public void InsertarIngrediente(CE_INGREDIENTE obj)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesIngrediente", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESINGREDIENTE", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
@@ -39,7 +39,7 @@ namespace CAPA_DATOS
             List<CE_INGREDIENTE> ingredientes = new List<CE_INGREDIENTE>();
 
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesIngrediente", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESINGREDIENTE", con))
             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -71,7 +71,7 @@ namespace CAPA_DATOS
         public void ActualizarIngrediente(CE_INGREDIENTE obj)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_AccionesIngrediente", con))
+            using (SqlCommand cmd = new SqlCommand("USP_ACCIONESINGREDIENTE", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;

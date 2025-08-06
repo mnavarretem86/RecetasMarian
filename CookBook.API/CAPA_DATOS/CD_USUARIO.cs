@@ -48,23 +48,24 @@ namespace CAPA_DATOS
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
                 cmd.Parameters.Add("@UsuarioID", SqlDbType.Int).Value = obj.UsuarioID;
 
+                // Para cada campo, si es null o cadena vacía => DBNull.Value
                 cmd.Parameters.Add("@Usuario", SqlDbType.NVarChar, 100).Value =
-                    string.IsNullOrEmpty(obj.Usuario) ? DBNull.Value : (object)obj.Usuario;
+                    string.IsNullOrWhiteSpace(obj.Usuario) ? DBNull.Value : (object)obj.Usuario;
 
                 cmd.Parameters.Add("@PrimerNombre", SqlDbType.NVarChar, 100).Value =
-                    string.IsNullOrEmpty(obj.PrimerNombre) ? DBNull.Value : (object)obj.PrimerNombre;
+                    string.IsNullOrWhiteSpace(obj.PrimerNombre) ? DBNull.Value : (object)obj.PrimerNombre;
 
                 cmd.Parameters.Add("@PrimerApellido", SqlDbType.NVarChar, 100).Value =
-                    string.IsNullOrEmpty(obj.PrimerApellido) ? DBNull.Value : (object)obj.PrimerApellido;
+                    string.IsNullOrWhiteSpace(obj.PrimerApellido) ? DBNull.Value : (object)obj.PrimerApellido;
 
                 cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value =
-                    string.IsNullOrEmpty(obj.Email) ? DBNull.Value : (object)obj.Email;
+                    string.IsNullOrWhiteSpace(obj.Email) ? DBNull.Value : (object)obj.Email;
 
                 cmd.Parameters.Add("@DNI", SqlDbType.NVarChar, 14).Value =
-                    string.IsNullOrEmpty(obj.DNI) ? DBNull.Value : (object)obj.DNI;
+                    string.IsNullOrWhiteSpace(obj.DNI) ? DBNull.Value : (object)obj.DNI;
 
                 cmd.Parameters.Add("@Contrasena", SqlDbType.NVarChar, 64).Value =
-                    string.IsNullOrEmpty(obj.Contrasena) ? DBNull.Value : (object)obj.Contrasena;
+                    string.IsNullOrWhiteSpace(obj.Contrasena) ? DBNull.Value : (object)obj.Contrasena;
 
                 cmd.Parameters.Add("@EstadoID", SqlDbType.Int).Value =
                     obj.EstadoID == 0 ? DBNull.Value : (object)obj.EstadoID;
@@ -72,6 +73,7 @@ namespace CAPA_DATOS
                 cmd.ExecuteNonQuery();
             }
         }
+
         #endregion
 
         #region Listar usuarios

@@ -23,7 +23,7 @@ namespace CookBook.API.Controllers
         {
             try
             {
-                var usuarios = _CNUsuario.ListarUsuarios(); 
+                var usuarios = _CNUsuario.ListarUsuarios();
                 return Ok(usuarios);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace CookBook.API.Controllers
         {
             try
             {
-                var usuario = _CNUsuario.ObtenerUsuarioPorId(id); 
+                var usuario = _CNUsuario.ObtenerUsuarioPorId(id);
                 if (usuario == null)
                     return NotFound(new { mensaje = "Usuario no encontrado." });
 
@@ -57,7 +57,7 @@ namespace CookBook.API.Controllers
 
             try
             {
-                _CNUsuario.CrearUsuario(usuario); 
+                _CNUsuario.CrearUsuario(usuario);
                 return Created("", new { mensaje = "Usuario creado correctamente." });
             }
             catch (Exception ex)
@@ -72,12 +72,11 @@ namespace CookBook.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (usuario.UsuarioID != id)
-                return BadRequest(new { error = "El ID del usuario no coincide." });
+            usuario.UsuarioID = id;
 
             try
             {
-                _CNUsuario.ActualizarUsuario(usuario); // Acción = 2
+                _CNUsuario.ActualizarUsuario(usuario);
                 return Ok(new { mensaje = "Usuario actualizado correctamente." });
             }
             catch (Exception ex)
