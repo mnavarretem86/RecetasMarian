@@ -1,3 +1,5 @@
+// src/App.js
+
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -5,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import { verifySession } from './api/auth';
+import { verifySession, logout } from './api/auth';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,13 +30,12 @@ function App() {
   }, []);
 
   const handleLogin = (userData) => {
-    localStorage.setItem('userData', JSON.stringify(userData));
     setUser(userData);
     toast.success('Inicio de sesión exitoso');
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userData');
+    logout(); // Llama a la función de la API que limpia el sessionStorage
     setUser(null);
     toast.info('Sesión cerrada');
   };
