@@ -10,7 +10,7 @@ const RecipeTable = ({ recipes, onEdit, user }) => {
             <div className="card-header">
               <h3 className="card-title">{recipe.nombre}</h3>
               <div className="card-actions">
-                <button 
+                <button
                   onClick={() => onEdit(recipe)}
                   className="action-btn edit-btn"
                   aria-label={`Editar ${recipe.nombre}`}
@@ -27,7 +27,7 @@ const RecipeTable = ({ recipes, onEdit, user }) => {
                 <strong>Categoría:</strong> <span className="category-tag">{recipe.categoria}</span>
               </p>
               <p className="card-detail">
-                <strong>Tiempo:</strong> <span className={`time-badge ${recipe.tiempo.includes('15') ? 'fast' : ''}`}>{recipe.tiempo}</span>
+                <strong>Tiempo:</strong> <span className={`time-badge ${recipe.tiempo <= 15 ? 'fast' : ''}`}>{recipe.tiempo} min</span>
               </p>
               <p className="card-detail">
                 <strong>Dificultad:</strong> <span className={`difficulty-badge ${recipe.dificultad.toLowerCase()}`}>
@@ -65,7 +65,7 @@ const RecipeTable = ({ recipes, onEdit, user }) => {
                   <p className="no-data">No especificados</p>
                 )}
               </div>
-              
+
               <p className="card-detail">
                 <strong>Autor:</strong> {recipe.usuario || user?.displayName || 'Anónimo'}
               </p>
