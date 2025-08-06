@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GeneralInfoStep = ({ currentRecipe, categories, handleChange, setStep }) => {
+const GeneralInfoStep = ({ currentRecipe, categories, handleChange, setStep, setIsModalOpen }) => {
   const categoryOptions = categories.map(cat => (
     <option key={cat.categoriaId} value={cat.categoriaId}>
       {cat.nombre}
@@ -37,10 +37,17 @@ const GeneralInfoStep = ({ currentRecipe, categories, handleChange, setStep }) =
           </select>
         </div>
       </div>
-      <div className="form-navigation">
-        <button type="button" onClick={() => setStep(2)}>
-          Siguiente: Ingredientes
-        </button>
+      <div className="form-navigation full-width-align">
+        <div className="left-buttons">
+          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">
+            Cancelar
+          </button>
+        </div>
+        <div className="right-buttons">
+          <button type="button" onClick={() => setStep(2)}>
+            Siguiente: Ingredientes
+          </button>
+        </div>
       </div>
     </>
   );

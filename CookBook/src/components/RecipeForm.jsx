@@ -110,13 +110,13 @@ const RecipeForm = ({
         await toast.promise(
             handleSaveRecipe(), 
             {
-                pending: 'Guardando receta...',
-                success: '¡Receta guardada exitosamente!',
-                error: 'Error al guardar la receta. Inténtalo de nuevo.'
+              pending: 'Guardando receta...',
+              success: '¡Receta guardada exitosamente!',
+              error: 'Error al guardar la receta. Inténtalo de nuevo.'
             }
         );
     } catch (error) {
-        console.error('Error saving recipe:', error);
+      console.error('Error saving recipe:', error);
     }
   };
 
@@ -137,6 +137,7 @@ const RecipeForm = ({
             categories={categories}
             handleChange={handleChange}
             setStep={setStep}
+            setIsModalOpen={setIsModalOpen} // ✨ Pasa la prop setIsModalOpen aquí ✨
           />
         )}
         {step === 2 && (
@@ -158,6 +159,7 @@ const RecipeForm = ({
             handleRemoveIngredient={handleRemoveIngredient}
             handleSortIngredients={handleSortIngredients}
             setStep={setStep}
+            setIsModalOpen={setIsModalOpen} 
           />
         )}
         {step === 3 && (
@@ -170,7 +172,7 @@ const RecipeForm = ({
             handleSortSteps={handleSortSteps}
             setStep={setStep}
             setIsModalOpen={setIsModalOpen}
-            handleSaveRecipe={onSaveRecipe} // Llama a la función que usa `toast.promise`
+            handleSaveRecipe={onSaveRecipe}
             isLoading={isLoading}
           />
         )}

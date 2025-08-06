@@ -19,6 +19,7 @@ const IngredientsStep = ({
   handleRemoveIngredient,
   handleSortIngredients,
   setStep,
+  setIsModalOpen, // Agrega setIsModalOpen aquí
 }) => {
   return (
     <>
@@ -114,13 +115,20 @@ const IngredientsStep = ({
         </div>
       </div>
       
-      <div className="form-navigation">
-        <button type="button" onClick={() => setStep(1)} className="back-btn">
-          Volver: Información general
-        </button>
-        <button type="button" onClick={() => setStep(3)}>
-          Siguiente: Pasos
-        </button>
+      <div className="form-navigation full-width-align">
+        <div className="left-buttons">
+          <button type="button" onClick={() => setStep(1)} className="back-btn">
+            Volver: Información general
+          </button>
+        </div>
+        <div className="right-buttons">
+          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">
+            Cancelar
+          </button>
+          <button type="button" onClick={() => setStep(3)}>
+            Siguiente: Pasos
+          </button>
+        </div>
       </div>
     </>
   );
