@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import { verifySession } from './api/auth';
@@ -15,6 +18,8 @@ function App() {
         setUser(userData);
       } catch (err) {
         console.error('Error verifying session:', err);
+        // Usamos toast.warn aquí
+        toast.warn('Sesión no válida o expirada');
       } finally {
         setLoadingAuth(false);
       }
@@ -26,11 +31,13 @@ function App() {
   const handleLogin = (userData) => {
     localStorage.setItem('userData', JSON.stringify(userData));
     setUser(userData);
+    toast.success('Inicio de sesión exitoso');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('userData');
     setUser(null);
+    toast.info('Sesión cerrada');
   };
 
   if (loadingAuth) {
@@ -45,13 +52,26 @@ function App() {
   return (
     <Router>
       <div className="app">
+        {/* Este es el componente CRÍTICO que renderiza las notificaciones */}
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+        
         <Routes>
-          <Route path="/" element={
-            user ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />
-          } />
-          <Route path="/dashboard" element={
-            user ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/" />
-          } />
+          <Route 
+            path="/" 
+            element={
+              user 
+                ? <Navigate to="/dashboard" /> 
+                : <Login onLogin={handleLogin} />
+            } 
+          />
+          <Route 
+            path="/dashboard" 
+            element={
+              user 
+                ? <Dashboard user={user} onLogout={handleLogout} /> 
+                : <Navigate to="/" />
+            } 
+          />
         </Routes>
       </div>
     </Router>

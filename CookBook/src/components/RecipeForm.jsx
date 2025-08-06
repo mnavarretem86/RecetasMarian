@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import GeneralInfoStep from './Pasos/GeneralInfoStep';
 import IngredientsStep from './Pasos/IngredientsStep';
 import StepsStep from './Pasos/StepsStep';
@@ -15,7 +16,6 @@ const RecipeForm = ({
   isLoading 
 }) => {
   const [step, setStep] = useState(1);
-
   const {
     searchTerm,
     setSearchTerm,
@@ -23,7 +23,6 @@ const RecipeForm = ({
     isLoading: isSearchLoading,
     searchError,
   } = useIngredientSearch();
-
   const [ingredientQuantity, setIngredientQuantity] = useState('');
   const [ingredientUnit, setIngredientUnit] = useState('');
   const [selectedIngredient, setSelectedIngredient] = useState(null);
@@ -53,7 +52,7 @@ const RecipeForm = ({
         ...prev,
         ingredientes: [...(prev.ingredientes || []), newIngredient],
       }));
-
+      toast.success(`${selectedIngredient.nombre} agregado a los ingredientes`);
       setSearchTerm('');
       setSelectedIngredient(null);
       setIngredientQuantity('');
@@ -62,10 +61,14 @@ const RecipeForm = ({
   };
 
   const handleRemoveIngredient = (id) => {
+    const ingredientToRemove = currentRecipe.ingredientes.find(ing => (ing.id || ing.ingredienteId) === id);
     setCurrentRecipe((prev) => ({
       ...prev,
       ingredientes: prev.ingredientes.filter((ing) => (ing.id || ing.ingredienteId) !== id),
     }));
+    if (ingredientToRemove) {
+      toast.info(`${ingredientToRemove.nombre} eliminado`);
+    }
   };
 
   const handleSortIngredients = (newIngredients) => {
@@ -82,6 +85,7 @@ const RecipeForm = ({
         ...prev,
         pasos: [...(prev.pasos || []), newStep],
       }));
+      toast.success('Paso agregado correctamente');
       setCurrentStepText('');
     }
   };
@@ -91,6 +95,7 @@ const RecipeForm = ({
       ...prev,
       pasos: prev.pasos.filter((_, index) => index !== indexToRemove),
     }));
+    toast.info('Paso eliminado');
   };
   
   const handleSortSteps = (newSteps) => {
@@ -98,6 +103,22 @@ const RecipeForm = ({
       ...prev,
       pasos: newSteps,
     }));
+  };
+
+  const onSaveRecipe = async () => {
+    try {
+        // Usa toast.promise para una experiencia de usuario completa
+        await toast.promise(
+            handleSaveRecipe(), 
+            {
+                pending: 'Guardando receta...',
+                success: '¡Receta guardada exitosamente!',
+                error: 'Error al guardar la receta. Inténtalo de nuevo.'
+            }
+        );
+    } catch (error) {
+        console.error('Error saving recipe:', error);
+    }
   };
 
   return (
@@ -110,7 +131,7 @@ const RecipeForm = ({
         <div className={`step-circle ${step === 3 ? 'active' : ''}`}>3</div>
       </div>
       
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         {step === 1 && (
           <GeneralInfoStep 
             currentRecipe={currentRecipe}
@@ -119,7 +140,6 @@ const RecipeForm = ({
             setStep={setStep}
           />
         )}
-
         {step === 2 && (
           <IngredientsStep
             currentRecipe={currentRecipe}
@@ -141,7 +161,6 @@ const RecipeForm = ({
             setStep={setStep}
           />
         )}
-        
         {step === 3 && (
           <StepsStep
             currentRecipe={currentRecipe}
@@ -152,7 +171,7 @@ const RecipeForm = ({
             handleSortSteps={handleSortSteps}
             setStep={setStep}
             setIsModalOpen={setIsModalOpen}
-            handleSaveRecipe={handleSaveRecipe}
+            handleSaveRecipe={onSaveRecipe} // Llama a la función que usa `toast.promise`
             isLoading={isLoading}
           />
         )}

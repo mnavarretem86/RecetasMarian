@@ -75,10 +75,10 @@ const StepsStep = ({
           </button>
         </div>
         <div className="right-buttons">
-          <button onClick={() => setIsModalOpen(false)} className="cancel-btn">
+          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">
             Cancelar
           </button>
-          <button onClick={handleSaveRecipe} className="save-btn" disabled={isLoading}>
+          <button type="button" onClick={handleSaveRecipe} className="save-btn" disabled={isLoading}>
             {isLoading ? 'Guardando...' : 'Guardar'}
           </button>
         </div>
