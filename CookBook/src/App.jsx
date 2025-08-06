@@ -1,4 +1,4 @@
-// src/App.js
+// src/App.jsx
 
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -35,7 +35,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    logout(); // Llama a la función de la API que limpia el sessionStorage
+    logout(); 
     setUser(null);
     toast.info('Sesión cerrada');
   };
