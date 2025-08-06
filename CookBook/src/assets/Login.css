@@ -1,0 +1,23 @@
+
+.login-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6); 
+}
+.password-input-container {
+  position: relative;
+}
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+.password-toggle-icon:hover {
+  color: #333;
+}
+.password-input-container input {
+  padding-right: 40px; 
+}
