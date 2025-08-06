@@ -63,6 +63,53 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CookBook.API.Controllers.DificultadController",
+    "Method": "ObtenerDificultades",
+    "RelativePath": "api/Dificultad",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.DificultadController",
+    "Method": "GuardarDificultad",
+    "RelativePath": "api/Dificultad",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dificultad",
+        "Type": "CAPA_ENTIDADES.CE_DIFICULTAD",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CookBook.API.Controllers.DificultadController",
+    "Method": "ActualizarDificultad",
+    "RelativePath": "api/Dificultad/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dificultad",
+        "Type": "CAPA_ENTIDADES.CE_DIFICULTAD",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CookBook.API.Controllers.IngredienteController",
     "Method": "ObtenerIngredientes",
     "RelativePath": "api/Ingrediente",

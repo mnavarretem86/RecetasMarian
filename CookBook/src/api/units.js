@@ -9,5 +9,6 @@ export const units = [
     { nombre: 'unidad' },
     { nombre: 'taza' },
     { nombre: 'onza' },
+    { nombre: 'Diente' },
     { nombre: 'pizca' },
   ];

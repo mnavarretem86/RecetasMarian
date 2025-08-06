@@ -119,6 +119,89 @@
         }
       }
     },
+    "/api/Dificultad": {
+      "get": {
+        "tags": [
+          "Dificultad"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dificultad"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dificultad/{id}": {
+      "put": {
+        "tags": [
+          "Dificultad"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_DIFICULTAD"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Ingrediente": {
       "get": {
         "tags": [
@@ -424,6 +507,44 @@
           },
           "descripcion": {
             "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "estadoId": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CE_DIFICULTAD": {
+        "type": "object",
+        "properties": {
+          "dificultadId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "maxLength": 255,
             "minLength": 0,
             "type": "string",
             "nullable": true

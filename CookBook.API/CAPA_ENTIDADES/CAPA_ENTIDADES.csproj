@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="CE_AUTH_USUARIO.cs" />
     <Compile Include="CE_CATEGORIA.cs" />
+    <Compile Include="CE_DIFICULTAD.cs" />
     <Compile Include="CE_INGREDIENTE.cs" />
     <Compile Include="CE_RECETAS_DETALLES.cs" />
     <Compile Include="CE_USUARIO.cs" />

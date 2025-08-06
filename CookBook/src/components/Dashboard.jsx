@@ -1,3 +1,4 @@
+// src/components/Dashboard.jsx
 import React, { useState, useMemo } from 'react';
 import { useRecipeManagement } from '../hooks/useRecipeManagement';
 import RecipeForm from './RecipeForm';
@@ -8,6 +9,7 @@ const Dashboard = ({ user, onLogout }) => {
   const {
     recipes,
     categories,
+    difficulties,
     isLoading,
     error,
     searchTerm,
@@ -25,7 +27,7 @@ const Dashboard = ({ user, onLogout }) => {
   } = useRecipeManagement(user);
 
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState(''); // Nuevo estado para la dificultad
+  const [selectedDifficulty, setSelectedDifficulty] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(8);
 
@@ -36,7 +38,6 @@ const Dashboard = ({ user, onLogout }) => {
       filtered = filtered.filter((r) => r.categoria === selectedCategory);
     }
     
-    // Nuevo filtro por dificultad
     if (selectedDifficulty) {
       filtered = filtered.filter((r) => r.dificultad === selectedDifficulty);
     }
@@ -48,7 +49,7 @@ const Dashboard = ({ user, onLogout }) => {
     }
 
     return filtered;
-  }, [recipes, searchTerm, selectedCategory, selectedDifficulty]); // Agregar selectedDifficulty a las dependencias
+  }, [recipes, searchTerm, selectedCategory, selectedDifficulty]);
 
   const totalRecipes = filteredAndSearchedRecipes.length;
   const indexOfLast = currentPage * recipesPerPage;
@@ -61,7 +62,6 @@ const Dashboard = ({ user, onLogout }) => {
     setSelectedCategory(e.target.value);
     setCurrentPage(1);
   };
-  // Nueva función para manejar el cambio de dificultad
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
     setCurrentPage(1);
@@ -74,7 +74,7 @@ const Dashboard = ({ user, onLogout }) => {
   const handleClearFilters = () => {
     setSearchTerm('');
     setSelectedCategory('');
-    setSelectedDifficulty(''); // Limpiar el estado de dificultad
+    setSelectedDifficulty('');
     setRecipesPerPage(8);
     setCurrentPage(1);
   };
@@ -138,16 +138,17 @@ const Dashboard = ({ user, onLogout }) => {
               </option>
             ))}
           </select>
-          {/* Nuevo select para la dificultad */}
           <select
             value={selectedDifficulty}
             onChange={handleDifficultyChange}
             className="filter-select"
           >
             <option value="">Todas las dificultades</option>
-            <option value="Fácil">Fácil</option>
-            <option value="Media">Media</option>
-            <option value="Difícil">Difícil</option>
+            {difficulties.map((diff) => (
+              <option key={diff.dificultadId} value={diff.nombre}>
+                {diff.nombre}
+              </option>
+            ))}
           </select>
         </div>
         <button onClick={handleClearFilters} className="clear-filters-btn">Limpiar filtros</button>
@@ -206,6 +207,7 @@ const Dashboard = ({ user, onLogout }) => {
               currentRecipe={currentRecipe}
               setCurrentRecipe={setCurrentRecipe}
               categories={categories}
+              difficulties={difficulties}
               handleSaveRecipe={handleSaveRecipe}
               setIsModalOpen={setIsModalOpen}
               isLoading={isLoading}

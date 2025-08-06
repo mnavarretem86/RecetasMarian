@@ -83,6 +83,8 @@
   .difficulty-badge.media { background-color: #FF9800; }
   .difficulty-badge.baja { background-color: #8BC34A; }
   .difficulty-badge.alta { background-color: #F44336; }
+  .difficulty-badge.muy { background-color: #F44336; }
+
   
   .action-btn {
     background: none;

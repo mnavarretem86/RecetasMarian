@@ -1,3 +1,4 @@
+// src/api/api.js
 import axios from 'axios';
 import axiosInstance from './axiosInstance'; 
 
@@ -14,18 +15,6 @@ const parseIngredientesArray = (ingredientesArray) =>
     IngredienteId: ing.id,
     Cantidad: parseFloat(ing.cantidad) || 0,
   }));
-
-const mapDifficultyNameToId = (difficultyName) => {
-  switch (difficultyName) {
-    case 'Fácil':
-      return 1;
-    case 'Media':
-      return 2;
-    case 'Difícil':
-    default:
-      return 3;
-  }
-};
 
 const handleApiError = (error) => {
   let errorMessage = 'Error desconocido al contactar el servidor';
@@ -75,6 +64,17 @@ export const getIngredients = async () => {
   }
 };
 
+export const getDifficulties = async () => {
+  try {
+    const response = await axiosInstance.get('/api/Dificultad', {
+      timeout: 10000
+    });
+    return { success: true, data: response.data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 export const searchIngredients = async (term) => {
   try {
     if (!term || term.trim() === '') {
@@ -98,7 +98,7 @@ export const createRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
-      DificultadId: mapDifficultyNameToId(recipeData.dificultad),
+      DificultadId: recipeData.dificultadId, 
       JsonIngredientes: JSON.stringify(ingredientesArray),
       JsonPasos: JSON.stringify(pasosArray)
     };
@@ -124,7 +124,7 @@ export const updateRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
-      DificultadId: mapDifficultyNameToId(recipeData.dificultad),
+      DificultadId: recipeData.dificultadId, 
       JsonIngredientes: JSON.stringify(ingredientesArray),
       JsonPasos: JSON.stringify(pasosArray)
     };

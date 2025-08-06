@@ -11,6 +11,7 @@ const RecipeForm = ({
   currentRecipe, 
   setCurrentRecipe, 
   categories, 
+  difficulties,
   handleSaveRecipe, 
   setIsModalOpen, 
   isLoading 
@@ -135,9 +136,10 @@ const RecipeForm = ({
           <GeneralInfoStep 
             currentRecipe={currentRecipe}
             categories={categories}
+            difficulties={difficulties}
             handleChange={handleChange}
             setStep={setStep}
-            setIsModalOpen={setIsModalOpen} // ✨ Pasa la prop setIsModalOpen aquí ✨
+            setIsModalOpen={setIsModalOpen} 
           />
         )}
         {step === 2 && (
