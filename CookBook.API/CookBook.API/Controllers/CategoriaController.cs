@@ -1,11 +1,13 @@
 ﻿using CAPA_ENTIDADES;
 using CAPA_NEGOCIO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 
 namespace CookBook.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriaController : ControllerBase

@@ -2,10 +2,12 @@
 using CAPA_DATOS;
 using CAPA_ENTIDADES;
 using CAPA_NEGOCIO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CookBook.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RECETASController : ControllerBase

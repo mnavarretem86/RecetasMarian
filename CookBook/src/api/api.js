@@ -1,8 +1,7 @@
-// api/api.js
 import axios from 'axios';
+import axiosInstance from './axiosInstance'; 
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5090';
-
 
 const parsePasosArray = (pasosArray) =>
   pasosArray.map((paso, index) => ({
@@ -23,7 +22,7 @@ const mapDifficultyNameToId = (difficultyName) => {
     case 'Media':
       return 2;
     case 'Difícil':
-    default: 
+    default:
       return 3;
   }
 };
@@ -45,8 +44,7 @@ const handleApiError = (error) => {
 
 export const getRecipes = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/RECETAS/list`, {
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+    const response = await axiosInstance.get('/api/RECETAS/list', {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -57,7 +55,7 @@ export const getRecipes = async () => {
 
 export const getCategories = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/Categoria`, {
+    const response = await axiosInstance.get('/api/Categoria', {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -68,8 +66,7 @@ export const getCategories = async () => {
 
 export const getIngredients = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/Ingrediente`, {
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+    const response = await axiosInstance.get('/api/Ingrediente', {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -83,7 +80,7 @@ export const searchIngredients = async (term) => {
     if (!term || term.trim() === '') {
       return { success: false, error: 'Término de búsqueda no puede estar vacío.' };
     }
-    const response = await axios.get(`${API_URL}/api/Ingrediente/search?nombre=${encodeURIComponent(term.trim())}`);
+    const response = await axiosInstance.get(`/api/Ingrediente/search?nombre=${encodeURIComponent(term.trim())}`);
     return { success: true, data: response.data };
   } catch (error) {
     return handleApiError(error);
@@ -101,13 +98,12 @@ export const createRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
-      DificultadId: mapDifficultyNameToId(recipeData.dificultad), 
-      JsonIngredientes: JSON.stringify(ingredientesArray), 
+      DificultadId: mapDifficultyNameToId(recipeData.dificultad),
+      JsonIngredientes: JSON.stringify(ingredientesArray),
       JsonPasos: JSON.stringify(pasosArray)
     };
 
-    const response = await axios.post(`${API_URL}/api/RECETAS/create`, requestData, {
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+    const response = await axiosInstance.post('/api/RECETAS/create', requestData, {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -128,13 +124,12 @@ export const updateRecipe = async (recipeData) => {
       TiempoPreparacion: parseInt(recipeData.tiempo) || 0,
       UsuarioId: recipeData.usuarioId || 1,
       CategoriaId: recipeData.categoriaId || 1,
-      DificultadId: mapDifficultyNameToId(recipeData.dificultad), // <-- Corrección aquí
+      DificultadId: mapDifficultyNameToId(recipeData.dificultad),
       JsonIngredientes: JSON.stringify(ingredientesArray),
       JsonPasos: JSON.stringify(pasosArray)
     };
 
-    const response = await axios.put(`${API_URL}/api/RECETAS/update`, requestData, {
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
+    const response = await axiosInstance.put('/api/RECETAS/update', requestData, {
       timeout: 10000
     });
     return { success: true, data: response.data };
@@ -145,9 +140,8 @@ export const updateRecipe = async (recipeData) => {
 
 export const deleteRecipe = async (recipeId) => {
   try {
-    const response = await axios.delete(`${API_URL}/api/RECETAS/delete`, {
+    const response = await axiosInstance.delete('/api/RECETAS/delete', {
       params: { id: recipeId },
-      headers: { 'Authorization': `Bearer ${localStorage.getItem('authToken')}` },
       timeout: 10000,
       validateStatus: (status) => status < 500
     });
