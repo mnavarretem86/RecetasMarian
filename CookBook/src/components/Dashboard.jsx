@@ -174,22 +174,21 @@ const Dashboard = ({ user, onLogout }) => {
         </div>
       </div>
 
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>{currentRecipe?.id ? 'Editar Receta' : 'Agregar Receta'}</h3>
-            <RecipeForm
-              currentRecipe={currentRecipe}
-              setCurrentRecipe={setCurrentRecipe}
-              categories={categories}
-              handleSaveRecipe={handleSaveRecipe}
-              setIsModalOpen={setIsModalOpen}
-              isLoading={isLoading}
-            />
-          </div>
-        </div>
-      )}
-
+{isModalOpen && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h3>{currentRecipe?.id ? 'Editar Receta' : 'Agregar Receta'}</h3>
+      <RecipeForm
+        currentRecipe={currentRecipe}
+        setCurrentRecipe={setCurrentRecipe}
+        categories={categories}
+        handleSaveRecipe={handleSaveRecipe}
+        setIsModalOpen={setIsModalOpen}
+        isLoading={isLoading}
+      />
+    </div>
+  </div>
+)}
       {isDeleteConfirmOpen && (
         <div className="modal-overlay">
           <div className="confirm-modal">

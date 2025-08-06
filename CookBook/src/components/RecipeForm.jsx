@@ -1,5 +1,3 @@
-// components/RecipeForm.jsx
-
 import React, { useState } from 'react';
 import { useIngredientSearch } from '../hooks/useIngredientSearch';
 import { units } from '../api/units';
@@ -140,97 +138,104 @@ const RecipeForm = ({
         </>
       )}
 
-      {/* Paso 2: Ingredientes */}
-      {step === 2 && (
-        <>
-          <div className="form-group ingredients-section">
-            <label>Ingredientes</label>
-            <div className="ingredient-search-container">
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Buscar Ingrediente</label>
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Ej: Pollo, Sal..."
-                  />
-                  {isSearchLoading && <p>Cargando ingredientes...</p>}
-                  {searchError && <p className="error-message">{searchError}</p>}
-                  {searchResults.length > 0 && (
-                    <ul className="search-results">
-                      {searchResults.map((ing) => (
-                        <li key={ing.ingredienteId} onClick={() => {
-                          setSelectedIngredient(ing);
-                          setIngredientUnit(ing.unidad);
-                        }}>
-                          {ing.nombre}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                {selectedIngredient && (
-                  <>
-                    <div className="form-group">
-                      <label>Cantidad</label>
-                      <input
-                        type="number"
-                        value={ingredientQuantity}
-                        onChange={(e) => setIngredientQuantity(e.target.value)}
-                        placeholder="Cantidad"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Unidad</label>
-                      <select 
-                        value={ingredientUnit} 
-                        onChange={(e) => setIngredientUnit(e.target.value)}
-                      >
-                        <option value="">Selecciona unidad</option>
-                        {units.map((unit, index) => (
-                          <option key={index} value={unit.nombre}>
-                            {unit.nombre}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </>
-                )}
+    {step === 2 && (
+  <>
+    <div className="step-2-container">
+      <div className="ingredient-search-area">
+        <div className="form-group">
+          <label>Buscar Ingrediente</label>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Ej: Pollo, Sal..."
+          />
+          {isSearchLoading && <p className="loading-message">Cargando ingredientes...</p>}
+          {searchError && <p className="error-message">{searchError}</p>}
+          {searchResults.length > 0 && (
+            <ul className="search-results">
+              {searchResults.map((ing) => (
+                <li key={ing.ingredienteId} onClick={() => {
+                  setSelectedIngredient(ing);
+                  setIngredientUnit(ing.unidad);
+                  setSearchTerm(''); // Clear search term after selection
+                }}>
+                  {ing.nombre}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {selectedIngredient && (
+          <div className="selected-ingredient-form">
+            <div className="form-row">
+              <div className="form-group">
+                <label>Cantidad</label>
+                <input
+                  type="number"
+                  value={ingredientQuantity}
+                  onChange={(e) => setIngredientQuantity(e.target.value)}
+                  placeholder="Cantidad"
+                />
               </div>
-              {selectedIngredient && (
-                <button type="button" onClick={handleAddIngredient} className="add-ingredient-btn">
-                  Añadir {selectedIngredient.nombre}
-                </button>
-              )}
-            </div>
-            <div className="added-ingredients-list">
-              {currentRecipe.ingredientes && currentRecipe.ingredientes.length > 0 ? (
-                <ul>
-                  {currentRecipe.ingredientes.map((ing) => (
-                    <li key={ing.id || ing.ingredienteId}>
-                      {ing.nombre} - {ing.cantidad} {ing.unidad}
-                      <button type="button" onClick={() => handleRemoveIngredient(ing.id || ing.ingredienteId)} className="remove-ingredient-btn">
-                        X
-                      </button>
-                    </li>
+              <div className="form-group">
+                <label>Unidad</label>
+                <select
+                  value={ingredientUnit}
+                  onChange={(e) => setIngredientUnit(e.target.value)}
+                >
+                  <option value="">Selecciona unidad</option>
+                  {units.map((unit, index) => (
+                    <option key={index} value={unit.nombre}>
+                      {unit.nombre}
+                    </option>
                   ))}
-                </ul>
-              ) : (
-                <p>Aún no has añadido ingredientes.</p>
-              )}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="form-navigation">
-            <button type="button" onClick={() => setStep(1)} className="back-btn">
-              Volver: Información general
+            <button
+              type="button"
+              onClick={handleAddIngredient}
+              className="add-ingredient-btn"
+            >
+              Añadir {selectedIngredient.nombre}
             </button>
-            <button type="button" onClick={() => setStep(3)}>
-              Siguiente: Pasos
-            </button>
           </div>
-        </>
-      )}
+        )}
+      </div>
+
+      <div className="added-ingredients-area">
+        <label>Ingredientes Añadidos</label>
+        <div className="added-ingredients-list">
+          {currentRecipe.ingredientes && currentRecipe.ingredientes.length > 0 ? (
+            <ul>
+              {currentRecipe.ingredientes.map((ing) => (
+                <li key={ing.id || ing.ingredienteId}>
+                  {ing.nombre} - {ing.cantidad} {ing.unidad}
+                  <button type="button" onClick={() => handleRemoveIngredient(ing.id || ing.ingredienteId)} className="remove-ingredient-btn">
+                    X
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Aún no has añadido ingredientes.</p>
+          )}
+        </div>
+      </div>
+    </div>
+    
+    <div className="form-navigation">
+      <button type="button" onClick={() => setStep(1)} className="back-btn">
+        Volver: Información general
+      </button>
+      <button type="button" onClick={() => setStep(3)}>
+        Siguiente: Pasos
+      </button>
+    </div>
+  </>
+)}
 
       {/* Paso 3: Pasos */}
       {step === 3 && (

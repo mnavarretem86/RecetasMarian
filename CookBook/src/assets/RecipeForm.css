@@ -3,7 +3,7 @@
   --surface-color: #1e1e1e;
   --text-color-primary: #e0e0e0;
   --text-color-secondary: #a0a0a0;
-  --primary-color: #bb86fc; 
+  --primary-color: #bb86fc;
   --error-color: #cf6679;
   --success-color: #66bb6a;
 }
@@ -12,13 +12,18 @@
   background: var(--surface-color);
   padding: 2rem;
   border-radius: 8px;
-  max-width: 800px;
-  width: 90%;
+
+  max-width: 650px; 
+  width: 95%;           
+  height: 95vh;        
+  max-height: none;    
+
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  max-height: 90vh;
   overflow-y: auto;
   color: var(--text-color-primary);
 }
+
+
 
 .modal-content h2 {
   font-size: 1.8rem;
@@ -108,10 +113,8 @@ textarea {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
 }
@@ -121,14 +124,37 @@ select option {
   color: var(--text-color-primary) !important;
 }
 
-.ingredients-section {
-  border-top: 1px solid #333;
-  padding-top: 1.5rem;
+/* --- Nuevas clases para el paso 2 de ingredientes --- */
+.step-2-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   margin-top: 1.5rem;
 }
 
+.ingredient-search-area {}
+.added-ingredients-area {}
+
+.form-group.ingredients-section {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: none;
+}
+
 .ingredient-search-container {
+  margin-bottom: 0;
+}
+
+.ingredient-search-area .form-group {
   margin-bottom: 1rem;
+}
+
+.ingredient-search-area .form-row {
+  gap: 1rem;
+}
+
+.ingredient-search-area .form-row .form-group {
+  margin-bottom: 0;
 }
 
 .search-results {
@@ -174,6 +200,7 @@ select option {
 }
 
 .add-ingredient-btn {
+  width: 100%;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
@@ -266,7 +293,7 @@ select option {
 
 .form-navigation {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
   margin-top: 1.5rem;
 }
@@ -285,14 +312,16 @@ select option {
 .form-navigation .cancel-btn {
   background-color: #444;
 }
+
 .form-navigation .cancel-btn:hover {
   background-color: #555;
 }
 
 .form-navigation .back-btn {
   background-color: #444;
-  margin-right: 1rem; 
+  margin-right: 1rem;
 }
+
 .form-navigation .back-btn:hover {
   background-color: #555;
 }
@@ -301,6 +330,7 @@ select option {
 .form-navigation .next-btn {
   background-color: var(--primary-color);
 }
+
 .form-navigation .save-btn:hover,
 .form-navigation .next-btn:hover {
   background-color: #9253d6;
@@ -314,10 +344,11 @@ select option {
 
 .form-navigation .right-buttons {
   display: flex;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
-.loading-message, .error-message {
+.loading-message,
+.error-message {
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
   border-radius: 4px;
