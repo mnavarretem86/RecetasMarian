@@ -1,340 +1,164 @@
 import React, { useState } from 'react';
+import GeneralInfoStep from './Pasos/GeneralInfoStep';
+import IngredientsStep from './Pasos/IngredientsStep';
+import StepsStep from './Pasos/StepsStep';
 import { useIngredientSearch } from '../hooks/useIngredientSearch';
 import { units } from '../api/units';
 import '../assets/RecipeForm.css';
-import { ReactSortable } from 'react-sortablejs'; 
 
 const RecipeForm = ({ 
-  currentRecipe, 
-  setCurrentRecipe, 
-  categories, 
-  handleSaveRecipe, 
-  setIsModalOpen, 
-  isLoading 
+  currentRecipe, 
+  setCurrentRecipe, 
+  categories, 
+  handleSaveRecipe, 
+  setIsModalOpen, 
+  isLoading 
 }) => {
-  const {
-    searchTerm,
-    setSearchTerm,
-    searchResults,
-    isLoading: isSearchLoading,
-    searchError,
-  } = useIngredientSearch();
+  const [step, setStep] = useState(1);
 
-  const [ingredientQuantity, setIngredientQuantity] = useState('');
-  const [ingredientUnit, setIngredientUnit] = useState('');
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
-  
-  const [currentStepText, setCurrentStepText] = useState('');
-  const [step, setStep] = useState(1);
+  const {
+    searchTerm,
+    setSearchTerm,
+    searchResults,
+    isLoading: isSearchLoading,
+    searchError,
+  } = useIngredientSearch();
 
-  if (!currentRecipe) return null;
+  const [ingredientQuantity, setIngredientQuantity] = useState('');
+  const [ingredientUnit, setIngredientUnit] = useState('');
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const [currentStepText, setCurrentStepText] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const newValue = name === 'tiempo' || name === 'categoriaId' ? Number(value) : value; 
-    setCurrentRecipe((prev) => ({
-      ...prev,
-      [name]: newValue,
-    }));
-  };
+  if (!currentRecipe) return null;
 
-  const handleAddIngredient = () => {
-    if (selectedIngredient && ingredientQuantity && ingredientUnit) {
-      const newIngredient = {
-        ...selectedIngredient,
-        id: selectedIngredient.ingredienteId,
-        cantidad: Number(ingredientQuantity),
-        unidad: ingredientUnit,
-      };
-      
-      setCurrentRecipe((prev) => ({
-        ...prev,
-        ingredientes: [...(prev.ingredientes || []), newIngredient],
-      }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const newValue = name === 'tiempo' || name === 'categoriaId' ? Number(value) : value; 
+    setCurrentRecipe((prev) => ({
+      ...prev,
+      [name]: newValue,
+    }));
+  };
 
-      setSearchTerm('');
-      setSelectedIngredient(null);
-      setIngredientQuantity('');
-      setIngredientUnit('');
-    }
-  };
+  const handleAddIngredient = () => {
+    if (selectedIngredient && ingredientQuantity && ingredientUnit) {
+      const newIngredient = {
+        ...selectedIngredient,
+        id: selectedIngredient.ingredienteId,
+        cantidad: Number(ingredientQuantity),
+        unidad: ingredientUnit,
+      };
+      
+      setCurrentRecipe((prev) => ({
+        ...prev,
+        ingredientes: [...(prev.ingredientes || []), newIngredient],
+      }));
 
-  const handleRemoveIngredient = (id) => {
-    setCurrentRecipe((prev) => ({
-      ...prev,
-      ingredientes: prev.ingredientes.filter((ing) => (ing.id || ing.ingredienteId) !== id),
-    }));
-  };
+      setSearchTerm('');
+      setSelectedIngredient(null);
+      setIngredientQuantity('');
+      setIngredientUnit('');
+    }
+  };
 
-  const handleAddStep = () => {
-    if (currentStepText.trim()) {
-      const newStep = { descripcion: currentStepText };
-      setCurrentRecipe((prev) => ({
-        ...prev,
-        pasos: [...(prev.pasos || []), newStep],
-      }));
-      setCurrentStepText('');
-    }
-  };
+  const handleRemoveIngredient = (id) => {
+    setCurrentRecipe((prev) => ({
+      ...prev,
+      ingredientes: prev.ingredientes.filter((ing) => (ing.id || ing.ingredienteId) !== id),
+    }));
+  };
 
-  const handleRemoveStep = (indexToRemove) => {
-    setCurrentRecipe((prev) => ({
-      ...prev,
-      pasos: prev.pasos.filter((_, index) => index !== indexToRemove),
-    }));
-  };
-  
-  const categoryOptions = categories.map(cat => (
-    <option key={cat.categoriaId} value={cat.categoriaId}>
-      {cat.nombre}
-    </option>
-  ));
+  const handleSortIngredients = (newIngredients) => {
+    setCurrentRecipe((prev) => ({
+      ...prev,
+      ingredientes: newIngredients,
+    }));
+  };
 
-  const handleSortSteps = (newSteps) => {
-    setCurrentRecipe((prev) => ({
-      ...prev,
-      pasos: newSteps,
-    }));
-  };
+  const handleAddStep = () => {
+    if (currentStepText.trim()) {
+      const newStep = { descripcion: currentStepText };
+      setCurrentRecipe((prev) => ({
+        ...prev,
+        pasos: [...(prev.pasos || []), newStep],
+      }));
+      setCurrentStepText('');
+    }
+  };
 
-  // New function to handle sorting ingredients
-  const handleSortIngredients = (newIngredients) => {
-    setCurrentRecipe((prev) => ({
-      ...prev,
-      ingredientes: newIngredients,
-    }));
-  };
+  const handleRemoveStep = (indexToRemove) => {
+    setCurrentRecipe((prev) => ({
+      ...prev,
+      pasos: prev.pasos.filter((_, index) => index !== indexToRemove),
+    }));
+  };
+  
+  const handleSortSteps = (newSteps) => {
+    setCurrentRecipe((prev) => ({
+      ...prev,
+      pasos: newSteps,
+    }));
+  };
 
-  return (
-    <>
-      <div className="step-indicator">
-        <div className={`step-circle ${step === 1 ? 'active' : ''}`}>1</div>
-        <div className="step-line"></div>
-        <div className={`step-circle ${step === 2 ? 'active' : ''}`}>2</div>
-        <div className="step-line"></div>
-        <div className={`step-circle ${step === 3 ? 'active' : ''}`}>3</div>
-      </div>
-    
-      {/* Paso 1: Datos generales */}
-      {step === 1 && (
-        <>
-          <div className="form-group">
-            <label>Nombre*</label>
-            <input type="text" name="nombre" value={currentRecipe.nombre || ''} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label>Descripción</label>
-            <textarea name="descripcion" value={currentRecipe.descripcion || ''} onChange={handleChange} rows="3" />
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-              <label>Tiempo (minutos)*</label>
-              <input type="number" name="tiempo" value={currentRecipe.tiempo || ''} onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-              <label>Dificultad</label>
-              <select name="dificultad" value={currentRecipe.dificultad || ''} onChange={handleChange}>
-                <option value="Fácil">Fácil</option>
-                <option value="Media">Media</option>
-                <option value="Difícil">Difícil</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Categoría</label>
-              <select name="categoriaId" value={currentRecipe.categoriaId || ''} onChange={handleChange}>
-                {categories.length > 0 ? categoryOptions : <option value="" disabled>Cargando categorías...</option>}
-              </select>
-            </div>
-          </div>
-          <div className="form-navigation">
-            <button type="button" onClick={() => setStep(2)}>
-              Siguiente: Ingredientes
-            </button>
-          </div>
-        </>
-      )}
+  return (
+    <>
+      <div className="step-indicator">
+        <div className={`step-circle ${step === 1 ? 'active' : ''}`}>1</div>
+        <div className="step-line"></div>
+        <div className={`step-circle ${step === 2 ? 'active' : ''}`}>2</div>
+        <div className="step-line"></div>
+        <div className={`step-circle ${step === 3 ? 'active' : ''}`}>3</div>
+      </div>
+      
+      <form>
+        {step === 1 && (
+          <GeneralInfoStep 
+            currentRecipe={currentRecipe}
+            categories={categories}
+            handleChange={handleChange}
+            setStep={setStep}
+          />
+        )}
 
-    {step === 2 && (
-      <>
-        <div className="step-2-container">
-          <div className="ingredient-search-area">
-            <div className="form-group">
-              <label>Buscar Ingrediente</label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Ej: Pollo, Sal..."
-              />
-              {isSearchLoading && <p className="loading-message">Cargando ingredientes...</p>}
-              {searchError && <p className="error-message">{searchError}</p>}
-              {searchResults.length > 0 && (
-                <ul className="search-results">
-                  {searchResults.map((ing) => (
-                    <li key={ing.ingredienteId} onClick={() => {
-                      setSelectedIngredient(ing);
-                      setIngredientUnit(ing.unidad);
-                      setSearchTerm(''); // Clear search term after selection
-                    }}>
-                      {ing.nombre}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            {selectedIngredient && (
-              <div className="selected-ingredient-form">
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Cantidad</label>
-                    <input
-                      type="number"
-                      value={ingredientQuantity}
-                      onChange={(e) => setIngredientQuantity(e.target.value)}
-                      placeholder="Cantidad"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Unidad</label>
-                    <select
-                      value={ingredientUnit}
-                      onChange={(e) => setIngredientUnit(e.target.value)}
-                    >
-                      <option value="">Selecciona unidad</option>
-                      {units.map((unit, index) => (
-                        <option key={index} value={unit.nombre}>
-                          {unit.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleAddIngredient}
-                  className="add-ingredient-btn"
-                >
-                  Añadir {selectedIngredient.nombre}
-                </button>
-              </div>
-            )}
-          </div>
-
-          <div className="added-ingredients-area">
-            <label>Ingredientes Añadidos (arrastra para reordenar)</label>
-            <div className="added-ingredients-list">
-              {currentRecipe.ingredientes && currentRecipe.ingredientes.length > 0 ? (
-                <ReactSortable
-                  tag="ul"
-                  list={currentRecipe.ingredientes}
-                  setList={handleSortIngredients}
-                  animation={200}
-                  className="styled-ingredients-list"
-                >
-                  {currentRecipe.ingredientes.map((ing) => (
-                    <li key={ing.id || ing.ingredienteId} className="ingredient-item">
-                      {ing.nombre} - {ing.cantidad} {ing.unidad}
-                      <button type="button" onClick={() => handleRemoveIngredient(ing.id || ing.ingredienteId)} className="remove-ingredient-btn">
-                        X
-                      </button>
-                    </li>
-                  ))}
-                </ReactSortable>
-              ) : (
-                <p>Aún no has añadido ingredientes.</p>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        <div className="form-navigation">
-          <button type="button" onClick={() => setStep(1)} className="back-btn">
-            Volver: Información general
-          </button>
-          <button type="button" onClick={() => setStep(3)}>
-            Siguiente: Pasos
-          </button>
-        </div>
-      </>
-    )}
-
-      {/* Paso 3: Pasos */}
-    {step === 3 && (
-      <>
-        <div className="form-group steps-section">
-          <label>Pasos de preparación (arrastra para reordenar)</label>
-          <div className="steps-list">
-            {currentRecipe.pasos && currentRecipe.pasos.length > 0 ? (
-              <ReactSortable 
-                tag="ol"
-                list={currentRecipe.pasos}
-                setList={handleSortSteps}
-                className="styled-steps-list"
-                animation={200}
-              >
-                {currentRecipe.pasos.map((paso, index) => (
-                  <li key={index} className="step-item">
-                    <span>{paso.descripcion}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveStep(index)}
-                      className="remove-step-btn"
-                      title="Eliminar paso"
-                    >
-                      Eliminar paso
-                    </button>
-                  </li>
-                ))}
-              </ReactSortable>
-            ) : (
-              <p>Aún no has añadido pasos.</p>
-            )}
-          </div>
-
-          <div className="step-input-container-vertical">
-            <input 
-              type="text"
-              value={currentStepText}
-              onChange={(e) => setCurrentStepText(e.target.value)}
-              placeholder="Ej: Cocinar el pollo en una sartén..."
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  handleAddStep();
-                }
-              }}
-            />
-            <button
-              type="button"
-              onClick={handleAddStep}
-              className="add-step-btn"
-            >
-              + Añadir Paso
-            </button>
-          </div>
-        </div>
-
-        <div className="form-navigation full-width-align">
-          <div className="left-buttons">
-            <button type="button" onClick={() => setStep(2)} className="back-btn">
-              Volver: Ingredientes
-            </button>
-          </div>
-          <div className="right-buttons">
-            <button onClick={() => setIsModalOpen(false)} className="cancel-btn">
-              Cancelar
-            </button>
-            <button onClick={handleSaveRecipe} className="save-btn" disabled={isLoading}>
-              {isLoading ? 'Guardando...' : 'Guardar'}
-            </button>
-          </div>
-        </div>
-      </>
-    )}
-
-    </>
-  );
+        {step === 2 && (
+          <IngredientsStep
+            currentRecipe={currentRecipe}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            searchResults={searchResults}
+            isSearchLoading={isSearchLoading}
+            searchError={searchError}
+            ingredientQuantity={ingredientQuantity}
+            setIngredientQuantity={setIngredientQuantity}
+            ingredientUnit={ingredientUnit}
+            setIngredientUnit={setIngredientUnit}
+            selectedIngredient={selectedIngredient}
+            setSelectedIngredient={setSelectedIngredient}
+            units={units}
+            handleAddIngredient={handleAddIngredient}
+            handleRemoveIngredient={handleRemoveIngredient}
+            handleSortIngredients={handleSortIngredients}
+            setStep={setStep}
+          />
+        )}
+        
+        {step === 3 && (
+          <StepsStep
+            currentRecipe={currentRecipe}
+            currentStepText={currentStepText}
+            setCurrentStepText={setCurrentStepText}
+            handleAddStep={handleAddStep}
+            handleRemoveStep={handleRemoveStep}
+            handleSortSteps={handleSortSteps}
+            setStep={setStep}
+            setIsModalOpen={setIsModalOpen}
+            handleSaveRecipe={handleSaveRecipe}
+            isLoading={isLoading}
+          />
+        )}
+      </form>
+    </>
+  );
 };
 
 export default RecipeForm;

@@ -1,0 +1,129 @@
+import React from 'react';
+import { ReactSortable } from 'react-sortablejs'; 
+
+const IngredientsStep = ({
+  currentRecipe,
+  searchTerm,
+  setSearchTerm,
+  searchResults,
+  isSearchLoading,
+  searchError,
+  ingredientQuantity,
+  setIngredientQuantity,
+  ingredientUnit,
+  setIngredientUnit,
+  selectedIngredient,
+  setSelectedIngredient,
+  units,
+  handleAddIngredient,
+  handleRemoveIngredient,
+  handleSortIngredients,
+  setStep,
+}) => {
+  return (
+    <>
+      <div className="step-2-container">
+        <div className="ingredient-search-area">
+          <div className="form-group">
+            <label>Buscar Ingrediente</label>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Ej: Pollo, Sal..."
+            />
+            {isSearchLoading && <p className="loading-message">Cargando ingredientes...</p>}
+            {searchError && <p className="error-message">{searchError}</p>}
+            {searchResults.length > 0 && (
+              <ul className="search-results">
+                {searchResults.map((ing) => (
+                  <li key={ing.ingredienteId} onClick={() => {
+                    setSelectedIngredient(ing);
+                    setIngredientUnit(ing.unidad);
+                    setSearchTerm('');
+                  }}>
+                    {ing.nombre}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {selectedIngredient && (
+            <div className="selected-ingredient-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Cantidad</label>
+                  <input
+                    type="number"
+                    value={ingredientQuantity}
+                    onChange={(e) => setIngredientQuantity(e.target.value)}
+                    placeholder="Cantidad"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Unidad</label>
+                  <select
+                    value={ingredientUnit}
+                    onChange={(e) => setIngredientUnit(e.target.value)}
+                  >
+                    <option value="">Selecciona unidad</option>
+                    {units.map((unit, index) => (
+                      <option key={index} value={unit.nombre}>
+                        {unit.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleAddIngredient}
+                className="add-ingredient-btn"
+              >
+                Añadir {selectedIngredient.nombre}
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="added-ingredients-area">
+          <label>Ingredientes Añadidos (arrastra para reordenar)</label>
+          <div className="added-ingredients-list">
+            {currentRecipe.ingredientes && currentRecipe.ingredientes.length > 0 ? (
+              <ReactSortable
+                tag="ul"
+                list={currentRecipe.ingredientes}
+                setList={handleSortIngredients}
+                animation={200}
+                className="styled-ingredients-list"
+              >
+                {currentRecipe.ingredientes.map((ing) => (
+                  <li key={ing.id || ing.ingredienteId} className="ingredient-item">
+                    {ing.nombre} - {ing.cantidad} {ing.unidad}
+                    <button type="button" onClick={() => handleRemoveIngredient(ing.id || ing.ingredienteId)} className="remove-ingredient-btn">
+                      X
+                    </button>
+                  </li>
+                ))}
+              </ReactSortable>
+            ) : (
+              <p>Aún no has añadido ingredientes.</p>
+            )}
+          </div>
+        </div>
+      </div>
+      
+      <div className="form-navigation">
+        <button type="button" onClick={() => setStep(1)} className="back-btn">
+          Volver: Información general
+        </button>
+        <button type="button" onClick={() => setStep(3)}>
+          Siguiente: Pasos
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default IngredientsStep;
