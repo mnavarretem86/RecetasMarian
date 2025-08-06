@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_AUTH.cs" />
     <Compile Include="CN_CATEGORIA.cs" />
     <Compile Include="CN_INGREDIENTE.cs" />
     <Compile Include="CN_RECETA.cs" />

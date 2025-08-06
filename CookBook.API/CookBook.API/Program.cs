@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuración de CORS
@@ -5,14 +9,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevelopmentPolicy", builder =>
     {
-        // Especifica los orígenes permitidos explícitamente
         builder.WithOrigins("http://localhost:5173", "https://localhost:5173")
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials();
     });
 
-    // Política para producción (ajusta los orígenes)
     options.AddPolicy("ProductionPolicy", builder =>
     {
         builder.WithOrigins("https://tudominio.com", "https://www.tudominio.com")
@@ -22,7 +24,27 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Resto de tu configuración...
+// Configuración de autenticación JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
+// Otros servicios
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,7 +61,7 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Configuración del pipeline
+// Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -52,9 +74,12 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseSession();
+
 app.MapControllers();
 
 app.Run();

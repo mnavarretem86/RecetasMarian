@@ -1,179 +1,150 @@
 ﻿using CAPA_ENTIDADES;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography.X509Certificates;
-
 
 namespace CAPA_DATOS
 {
     public class CD_USUARIO
     {
-
         private readonly CD_CONEXION _CONEXION;
-        DataTable table = new DataTable();
-        SqlCommand cmd = new SqlCommand();
-        SqlDataAdapter da = new SqlDataAdapter();
-
 
         public CD_USUARIO(IConfiguration configuration)
         {
             _CONEXION = new CD_CONEXION(configuration);
         }
 
-        #region guardar 
-        public void INSERTAR_USUARIO(CE_USUARIO obj)
+        #region Insertar usuario
+        public void InsertarUsuario(CE_USUARIO obj)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
             using (SqlCommand cmd = new SqlCommand("USP_USUARIOS", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
-                cmd.Parameters.Add("@Usuario", SqlDbType.NVarChar, 100).Value = obj.Usuario;
-                cmd.Parameters.Add("@PrimerNombre", SqlDbType.NVarChar, 100).Value = obj.PrimerNombre;
-                cmd.Parameters.Add("@PrimerApellido", SqlDbType.NVarChar, 100).Value = obj.PrimerApellido;
-                cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = obj.Email;
-                cmd.Parameters.Add("@DNI", SqlDbType.NVarChar, 14).Value = obj.DNI;
-                cmd.Parameters.Add("@Contrasena", SqlDbType.NVarChar, 64).Value = obj.Contrasena;
+
+                cmd.Parameters.Add("@Usuario", SqlDbType.NVarChar, 100).Value = obj.Usuario ?? string.Empty;
+                cmd.Parameters.Add("@PrimerNombre", SqlDbType.NVarChar, 100).Value = obj.PrimerNombre ?? string.Empty;
+                cmd.Parameters.Add("@PrimerApellido", SqlDbType.NVarChar, 100).Value = obj.PrimerApellido ?? string.Empty;
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = obj.Email ?? string.Empty;
+                cmd.Parameters.Add("@DNI", SqlDbType.NVarChar, 14).Value = obj.DNI ?? string.Empty;
+                cmd.Parameters.Add("@Contrasena", SqlDbType.NVarChar, 64).Value = obj.Contrasena ?? string.Empty;
 
                 cmd.ExecuteNonQuery();
             }
         }
-        #endregion guardar
+        #endregion
 
-        #region LISTAR usuarios
-        public List<CE_DETALLE_USUARIO> LISTAR_USUARIOS()
+        #region Actualizar usuario
+        public void ActualizarUsuario(CE_USUARIO obj)
         {
-            List<CE_DETALLE_USUARIO> Usuario = new List<CE_DETALLE_USUARIO>();
+            using (SqlConnection con = _CONEXION.AbrirConexion())
+            using (SqlCommand cmd = new SqlCommand("USP_USUARIOS", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 2;
+                cmd.Parameters.Add("@UsuarioID", SqlDbType.Int).Value = obj.UsuarioID;
+
+                cmd.Parameters.Add("@Usuario", SqlDbType.NVarChar, 100).Value =
+                    string.IsNullOrEmpty(obj.Usuario) ? DBNull.Value : (object)obj.Usuario;
+
+                cmd.Parameters.Add("@PrimerNombre", SqlDbType.NVarChar, 100).Value =
+                    string.IsNullOrEmpty(obj.PrimerNombre) ? DBNull.Value : (object)obj.PrimerNombre;
+
+                cmd.Parameters.Add("@PrimerApellido", SqlDbType.NVarChar, 100).Value =
+                    string.IsNullOrEmpty(obj.PrimerApellido) ? DBNull.Value : (object)obj.PrimerApellido;
+
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value =
+                    string.IsNullOrEmpty(obj.Email) ? DBNull.Value : (object)obj.Email;
+
+                cmd.Parameters.Add("@DNI", SqlDbType.NVarChar, 14).Value =
+                    string.IsNullOrEmpty(obj.DNI) ? DBNull.Value : (object)obj.DNI;
+
+                cmd.Parameters.Add("@Contrasena", SqlDbType.NVarChar, 64).Value =
+                    string.IsNullOrEmpty(obj.Contrasena) ? DBNull.Value : (object)obj.Contrasena;
+
+                cmd.Parameters.Add("@EstadoID", SqlDbType.Int).Value =
+                    obj.EstadoID == 0 ? DBNull.Value : (object)obj.EstadoID;
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+        #endregion
+
+        #region Listar usuarios
+        public List<CE_USUARIO> ListarUsuarios()
+        {
+            List<CE_USUARIO> lista = new List<CE_USUARIO>();
+
             using (SqlConnection con = _CONEXION.AbrirConexion())
             using (SqlCommand cmd = new SqlCommand("USP_USUARIOS", con))
             using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-
             {
-                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
-                DataTable table = new DataTable();
                 cmd.CommandType = CommandType.StoredProcedure;
-                da.Fill(table);
-                foreach (DataRow dr in table.Rows)
+                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 3;
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
                 {
-                    CE_DETALLE_USUARIO usuario = new CE_DETALLE_USUARIO
+                    lista.Add(new CE_USUARIO
                     {
                         UsuarioID = dr["UsuarioId"] is DBNull ? 0 : Convert.ToInt32(dr["UsuarioId"]),
-                        Usuario = dr["Usuario"] is DBNull ? string.Empty : dr["Usuario"].ToString(),
-                        NombreCompletoUsuario = dr["NombreCompletoUsuario"] is DBNull ? string.Empty : dr["NombreCompletoUsuario"].ToString(),
-                        Email = dr["Email"] is DBNull ? string.Empty : dr["Email"].ToString(),
-                        DNI = dr["DNI"] is DBNull ? string.Empty : dr["DNI"].ToString(),
-                        Contrasena = dr["Contrasena"] is DBNull ? string.Empty : dr["Contrasena"].ToString(),
-                        FechaCreacion = dr["FechaCreacion"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(dr["FechaCreacion"]),
-                        FechaModificacion = dr["FechaModificacion"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(dr["FechaModificacion"]),
-                        EstadoID = dr["EstadoID"] is DBNull ? 0 : Convert.ToInt32(dr["EstadoID"])
-                    };
-                    Usuario.Add(usuario);
+                        Usuario = dr["Usuario"]?.ToString(),
+                        PrimerNombre = dr["NombreCompletoUsuario"]?.ToString()?.Split(' ')[0] ?? "",
+                        PrimerApellido = dr["NombreCompletoUsuario"]?.ToString()?.Split(' ').Length > 1 ? dr["NombreCompletoUsuario"].ToString().Split(' ')[1] : "",
+                        Email = dr["Email"]?.ToString(),
+                        DNI = dr["DNI"]?.ToString(),
+                        Contrasena = dr["Contrasena"]?.ToString(),
+                        FechaCreacion = dr["FechaCreacion"] is DBNull ? (DateTime?)null : Convert.ToDateTime(dr["FechaCreacion"]),
+                        FechaModificacion = dr["FechaModificacion"] is DBNull ? (DateTime?)null : Convert.ToDateTime(dr["FechaModificacion"]),
+                        EstadoID = dr["EstadoId"] is DBNull ? 0 : Convert.ToInt32(dr["EstadoId"])
+                    });
                 }
-                return Usuario;
+
+                return lista;
             }
         }
-        #endregion Listar usuarios
+        #endregion
 
-        #region Actualizar 
-        public void ACTUALIZAR_USUARIO(CE_USUARIO obj)
+        #region Obtener usuario por ID
+        public CE_USUARIO ObtenerUsuarioPorId(int usuarioId)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
             using (SqlCommand cmd = new SqlCommand("USP_USUARIOS", con))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 1;
-                cmd.Parameters.Add("@UsuarioId", SqlDbType.Int).Value = obj.UsuarioID;
-                cmd.Parameters.Add("@Usuario", SqlDbType.NVarChar, 100).Value = obj.Usuario;
-                cmd.Parameters.Add("@PrimerNombre", SqlDbType.NVarChar, 100).Value = obj.PrimerNombre;
-                cmd.Parameters.Add("@PrimerApellido", SqlDbType.NVarChar, 100).Value = obj.PrimerApellido;
-                cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = obj.Email;
-                cmd.Parameters.Add("@DNI", SqlDbType.NVarChar, 14).Value = obj.DNI;
-                cmd.Parameters.Add("@Contrasena", SqlDbType.VarBinary, 256).Value = obj.Contrasena;
-
-            }
-        }
-        #endregion Actualizar 
-        #region filtrar
-        public List<CE_DETALLE_USUARIO> Filtrar_USUARIOS(CE_DETALLE_USUARIO obj)
-        {
-            List<CE_DETALLE_USUARIO> Usuario = new List<CE_DETALLE_USUARIO>();
-
-            using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_USUARIOS", con))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Accion", SqlDbType.Int).Value = 4;
-                cmd.Parameters.AddWithValue("@UsuarioID", obj.UsuarioID);
+                cmd.Parameters.Add("@UsuarioID", SqlDbType.Int).Value = usuarioId;
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable table = new DataTable();
-                da.Fill(table);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                if (table.Rows.Count > 0)
+                if (dt.Rows.Count == 0)
+                    return null;
+
+                DataRow dr = dt.Rows[0];
+
+                return new CE_USUARIO
                 {
-                    DataRow dr = table.Rows[0];
-                    CE_DETALLE_USUARIO usuario = new CE_DETALLE_USUARIO
-                    {
-                        UsuarioID = dr["UsuarioId"] is DBNull ? 0 : Convert.ToInt32(dr["UsuarioId"]),
-                        Usuario = dr["Usuario"] is DBNull ? string.Empty : dr["Usuario"].ToString(),
-                        NombreCompletoUsuario = dr["NombreCompletoUsuario"] is DBNull ? string.Empty : dr["NombreCompletoUsuario"].ToString(),
-                        Email = dr["Email"] is DBNull ? string.Empty : dr["Email"].ToString(),
-                        DNI = dr["DNI"] is DBNull ? string.Empty : dr["DNI"].ToString(),
-                        Contrasena = dr["Contrasena"] is DBNull ? string.Empty : dr["Contrasena"].ToString(),
-                        FechaCreacion = dr["FechaCreacion"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(dr["FechaCreacion"]),
-                        FechaModificacion = dr["FechaModificacion"] is DBNull ? DateTime.MinValue : Convert.ToDateTime(dr["FechaModificacion"]),
-                        EstadoID = dr["EstadoID"] is DBNull ? 0 : Convert.ToInt32(dr["EstadoID"])
-                    }
-                ;
-                    Usuario.Add(usuario);
-                }
-
-                return Usuario;
-
+                    UsuarioID = dr["UsuarioId"] is DBNull ? 0 : Convert.ToInt32(dr["UsuarioId"]),
+                    Usuario = dr["Usuario"]?.ToString(),
+                    PrimerNombre = dr["NombreCompletoUsuario"]?.ToString()?.Split(' ')[0] ?? "",
+                    PrimerApellido = dr["NombreCompletoUsuario"]?.ToString()?.Split(' ').Length > 1 ? dr["NombreCompletoUsuario"].ToString().Split(' ')[1] : "",
+                    Email = dr["Email"]?.ToString(),
+                    DNI = dr["DNI"]?.ToString(),
+                    Contrasena = dr["Contrasena"]?.ToString(),
+                    FechaCreacion = dr["FechaCreacion"] is DBNull ? (DateTime?)null : Convert.ToDateTime(dr["FechaCreacion"]),
+                    FechaModificacion = dr["FechaModificacion"] is DBNull ? (DateTime?)null : Convert.ToDateTime(dr["FechaModificacion"]),
+                    EstadoID = dr["EstadoId"] is DBNull ? 0 : Convert.ToInt32(dr["EstadoId"])
+                };
             }
-            #endregion filtrar
-
-
         }
-
-        public CE_USUARIO IniciarSesion(string email, string contrasena)
-        {
-            using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("SP_IniciarSesion", con))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 100).Value = email;
-                cmd.Parameters.Add("@Contrasena", SqlDbType.NVarChar, 64).Value = contrasena;
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return new CE_USUARIO
-                        {
-                            UsuarioID = Convert.ToInt32(reader["UsuarioId"]),
-                            Usuario = reader["Usuario"].ToString(),
-                            PrimerNombre = reader["PrimerNombre"].ToString(),
-                            PrimerApellido = reader["PrimerApellido"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            DNI = reader["DNI"] != DBNull.Value ? reader["DNI"].ToString() : null,
-Contrasena = reader["Contrasena"] != DBNull.Value ? reader["Contrasena"].ToString() : null,
-FechaCreacion = reader["FechaCreacion"] != DBNull.Value ? Convert.ToDateTime(reader["FechaCreacion"]) : (DateTime?)null,
-FechaModificacion = reader["FechaModificacion"] != DBNull.Value ? Convert.ToDateTime(reader["FechaModificacion"]) : (DateTime?)null,
-EstadoID = reader["EstadoID"] != DBNull.Value ? Convert.ToInt32(reader["EstadoID"]) : (int?)null
-                        };
-                    }
-                }
-            }
-
-            return null;
-        }
-    } 
+        #endregion
+    }
 }

@@ -5,6 +5,37 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CN_LOGINREQUEST"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CN_LOGINREQUEST"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CN_LOGINREQUEST"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Categoria": {
       "get": {
         "tags": [
@@ -271,7 +302,7 @@
         }
       }
     },
-    "/api/Usuario/Usuarios": {
+    "/api/Usuario": {
       "get": {
         "tags": [
           "Usuario"
@@ -281,9 +312,38 @@
             "description": "OK"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_USUARIO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_USUARIO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CE_USUARIO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "/api/Usuario/Usuariosporid": {
+    "/api/Usuario/{id}": {
       "get": {
         "tags": [
           "Usuario"
@@ -291,7 +351,8 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -303,13 +364,22 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/api/Usuario/actualizar": {
+      },
       "put": {
         "tags": [
           "Usuario"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -329,49 +399,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Usuario/IniciarSesion": {
-      "post": {
-        "tags": [
-          "Usuario"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Usuario/ObtenerUsuarioSesion": {
-      "get": {
-        "tags": [
-          "Usuario"
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -533,6 +560,10 @@
             "type": "string",
             "nullable": true
           },
+          "estadoID": {
+            "type": "integer",
+            "format": "int32"
+          },
           "fechaCreacion": {
             "type": "string",
             "format": "date-time",
@@ -543,15 +574,15 @@
             "format": "date-time",
             "nullable": true
           },
-          "estadoID": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "nombreCompletoUsuario": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
       },
-      "LoginRequest": {
+      "CN_LOGINREQUEST": {
         "type": "object",
         "properties": {
           "email": {
