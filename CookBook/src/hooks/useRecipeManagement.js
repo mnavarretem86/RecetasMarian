@@ -1,9 +1,7 @@
 // hooks/useRecipeManagement.js
-
 import { useState, useEffect, useCallback } from 'react';
 import { getRecipes, createRecipe, deleteRecipe, getCategories, updateRecipe } from '../api/api';
 
-// FUNCIÓN CORREGIDA para parsear la cadena de ingredientes del API
 const parseIngredientsString = (ingredientesString) => {
   if (!ingredientesString) return [];
   try {

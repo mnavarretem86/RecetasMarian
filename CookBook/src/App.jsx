@@ -18,7 +18,6 @@ function App() {
         setUser(userData);
       } catch (err) {
         console.error('Error verifying session:', err);
-        // Usamos toast.warn aquí
         toast.warn('Sesión no válida o expirada');
       } finally {
         setLoadingAuth(false);
@@ -52,7 +51,6 @@ function App() {
   return (
     <Router>
       <div className="app">
-        {/* Este es el componente CRÍTICO que renderiza las notificaciones */}
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
         
         <Routes>

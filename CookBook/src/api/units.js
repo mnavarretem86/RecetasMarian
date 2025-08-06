@@ -1,5 +1,4 @@
 // src/utils/units.js
-
 export const units = [
     { nombre: 'gramos' },
     { nombre: 'kilogramos' },
