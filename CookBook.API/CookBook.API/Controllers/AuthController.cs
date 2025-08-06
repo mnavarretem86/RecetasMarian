@@ -47,7 +47,12 @@ namespace TuProyecto.Controllers
                     new Claim("Email", usuario.Email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(6),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+
+                // --- Agrega estas dos líneas para solucionar el error ---
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"]
+                // --- Fin de la corrección ---
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
