@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "CDDzOVCpWzp9hUYIOm+R9BD4w/Z0G4gXUyGelQ1mEPY=",
+  "Source": "CookBook.API",
+  "BasePath": "_content/CookBook.API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
