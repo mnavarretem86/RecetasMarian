@@ -53,5 +53,19 @@ namespace CookBook.API.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpDelete("delete/{id}")]
+        public IActionResult EliminarReceta(int id)
+        {
+            try
+            {
+                _CNRecetas.cn_EliminarReceta(id);
+                return Ok(new { mensaje = "Receta eliminada correctamente." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }

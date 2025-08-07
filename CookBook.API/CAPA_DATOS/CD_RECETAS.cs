@@ -104,25 +104,20 @@ namespace CAPA_DATOS
         #endregion
 
         #region Eliminar Receta (opcional)
-        public string ELIMINAR_RECETAS(RecetaCompletaDTO receta)
+        public void EliminarReceta(int recetaId)
         {
             using (SqlConnection con = _CONEXION.AbrirConexion())
-            using (SqlCommand cmd = new SqlCommand("USP_Eliminar_Recetas", con))
+            using (SqlCommand cmd = new SqlCommand("USP_RECETA", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RecetaId", receta.RecetaId);
+                cmd.Parameters.AddWithValue("@Accion", 4);
+                cmd.Parameters.AddWithValue("@RecetaId", recetaId);
 
-                using (var reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return reader["Mensaje"].ToString();
-                    }
-                }
+                cmd.ExecuteNonQuery();
             }
-
-            return "Error al eliminar.";
         }
+
+
         #endregion
     }
 }

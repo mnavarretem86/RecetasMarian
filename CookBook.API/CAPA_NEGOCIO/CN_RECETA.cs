@@ -1,7 +1,6 @@
 ﻿using CAPA_DATOS;
 using CAPA_ENTIDADES;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 
 namespace CAPA_NEGOCIO
@@ -28,6 +27,11 @@ namespace CAPA_NEGOCIO
         public void cn_ActualizarRecetaCompleta(RecetaCompletaDTO receta)
         {
             _CDReceta.ActualizarRecetaCompleta(receta);
+        }
+
+        public void cn_EliminarReceta(int recetaId)
+        {
+            _CDReceta.EliminarReceta(recetaId);
         }
     }
 }
