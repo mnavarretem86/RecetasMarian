@@ -1,4 +1,3 @@
-// src/components/Dashboard.jsx
 import React, { useState, useMemo } from 'react';
 import { useRecipeManagement } from '../hooks/useRecipeManagement';
 import RecipeForm from './RecipeForm';
@@ -37,7 +36,7 @@ const Dashboard = ({ user, onLogout }) => {
     if (selectedCategory) {
       filtered = filtered.filter((r) => r.categoria === selectedCategory);
     }
-    
+      
     if (selectedDifficulty) {
       filtered = filtered.filter((r) => r.dificultad === selectedDifficulty);
     }

@@ -247,3 +247,277 @@ body {
   font-weight: 500;
   white-space: nowrap;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content, .confirm-modal {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3, .confirm-modal h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-primary);
+}
+
+.confirm-modal p {
+  color: var(--text-color-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-btn {
+  background-color: var(--surface-color-light);
+  color: var(--text-color-primary);
+  border: none;
+}
+
+.cancel-btn:hover {
+  background-color: var(--border-color);
+}
+
+.delete-btn {
+  background-color: var(--danger-color);
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-color-hover);
+}
+
+/* TABLE STYLES */
+.recipe-table-container {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recipe-table thead {
+  background-color: var(--surface-color-light);
+}
+
+.recipe-table th, .recipe-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.recipe-table th {
+  font-weight: 600;
+  color: var(--text-color-primary);
+}
+
+.recipe-table td {
+  color: var(--text-color-secondary);
+}
+
+.recipe-table tr:last-child td {
+  border-bottom: none;
+}
+
+.recipe-table tbody tr:hover {
+  background-color: var(--surface-color-light);
+}
+
+.recipe-table-actions {
+  display: flex;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.recipe-table-actions .action-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recipe-table-actions .action-btn:hover {
+  background-color: var(--border-color);
+}
+
+.recipe-table-actions .edit-btn svg {
+  color: #ffb74d; /* Naranja */
+}
+
+.recipe-table-actions .delete-btn svg {
+  color: #e57373; /* Rojo */
+}
+
+/* FORM STYLES */
+.recipe-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.recipe-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color-primary);
+}
+
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color-primary);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.recipe-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.recipe-form input:focus,
+.recipe-form textarea:focus,
+.recipe-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
+}
+
+.recipe-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.recipe-form .form-actions .cancel-btn {
+  background-color: var(--surface-color-light);
+  color: var(--text-color-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.recipe-form .form-actions .save-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recipe-form .form-actions .save-btn:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.recipe-form .form-actions .save-btn:disabled {
+  background-color: var(--surface-color-light);
+  cursor: not-allowed;
+}
+
+/* MOBILE ADAPTATIONS */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-left h1 {
+    font-size: 1.2rem;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .header-right .add-btn,
+  .header-right .logout-btn {
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filter-select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .filter-label {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  
+  .clear-filters-btn {
+    width: 100%;
+  }
+
+  .pagination-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .recipe-table th, .recipe-table td {
+    padding: 0.75rem;
+  }
+}

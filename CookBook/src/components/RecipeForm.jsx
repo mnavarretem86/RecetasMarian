@@ -29,7 +29,6 @@ const RecipeForm = ({
  const [selectedIngredient, setSelectedIngredient] = useState(null);
  const [currentStepText, setCurrentStepText] = useState('');
 
- // Inicializa currentRecipe con valores vacíos para que los selectores funcionen correctamente
  if (!currentRecipe) {
   setCurrentRecipe({
    nombre: '',

@@ -1,3 +1,5 @@
+/* Estilos existentes... */
+
 :root {
   --background-color: #121212;
   --surface-color: #1e1e1e;
@@ -12,18 +14,14 @@
   background: var(--surface-color);
   padding: 2rem;
   border-radius: 8px;
-
-  max-width: 650px; 
-  width: 95%;           
-  height: 80vh;        
-  max-height: none;    
-
+  max-width: 650px;
+  width: 95%;
+  height: 80vh;
+  max-height: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   overflow-y: auto;
   color: var(--text-color-primary);
 }
-
-
 
 .modal-content h2 {
   font-size: 1.8rem;
@@ -403,4 +401,59 @@ select option {
 .right-buttons {
   display: flex;
   gap: 1rem;
+}
+
+
+/* --- Media Queries para dispositivos móviles --- */
+
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1.5rem;
+    width: 98%;
+    /* Altura más adaptativa para móviles, ajustándose al contenido */
+    max-height: 90vh; 
+  }
+
+  .step-indicator {
+    margin-bottom: 1rem;
+  }
+
+  .step-line {
+    width: 30px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .step-2-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .added-ingredients-area,
+  .ingredient-search-area {
+    /* Los elementos de búsqueda e ingredientes ocuparán todo el ancho */
+    width: 100%; 
+  }
+
+  /* Los botones de navegación se apilarán verticalmente */
+  .form-navigation.full-width-align {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .left-buttons,
+  .right-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .left-buttons .back-btn,
+  .right-buttons button {
+    width: 100%;
+    margin-right: 0;
+  }
 }

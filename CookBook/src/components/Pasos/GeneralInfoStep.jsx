@@ -1,4 +1,3 @@
-// src/components/GeneralInfoStep.js
 
 import React, { useState, useEffect } from 'react';
 

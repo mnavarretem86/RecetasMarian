@@ -1,144 +1,142 @@
 .dashboard {
-    background-color: #1a1a1a;
-    color: #f1f1f1;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+  min-height: 100vh;
+  padding: 20px;
+}
+ 
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+ 
+.recipe-card {
+  background-color: #2c2c2c; 
+  border: 1px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+ 
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+ 
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+ 
+.card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+ 
+.card-body {
+  flex-grow: 1;
+}
+ 
+.card-detail {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+ 
+.card-detail strong {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+ 
+.card-pasos {
+  white-space: pre-wrap; 
+}
+ 
+.card-description {
+  margin-top: 10px;
+  font-style: italic;
+}
+ 
+.category-tag, .time-badge, .difficulty-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: capitalize;
+}
+ 
+.category-tag { background-color: #4CAF50; }
+.time-badge { background-color: #2196F3; }
+.time-badge.fast { background-color: #FFC107; }
+.difficulty-badge.media { background-color: #FF9800; }
+.difficulty-badge.baja { background-color: #8BC34A; }
+.difficulty-badge.alta, .difficulty-badge.muy { background-color: #F44336; }
+ 
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 8px;
+  transition: transform 0.2s;
+  color: #777;
+}
+ 
+.action-btn:hover {
+  transform: scale(1.1);
+  color: #e0e0e0;
+}
+ 
+.edit-btn svg { color: #2196F3; }
+ 
+.empty-state {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #aaa;
+  grid-column: 1 / -1;
+}
+ 
+@media (max-width: 768px) {
   .recipes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: 1fr;
   }
-  
-  .recipe-card {
-    background-color: #2c2c2c; 
-    border: 1px solid #444;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .recipe-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-  }
-  
-  .card-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #fff;
-  }
-  
-  .card-body {
-    flex-grow: 1;
-  }
-  
-  .card-detail {
-    font-size: 0.9rem;
-    color: #bbb;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  
-  .card-detail strong {
-    color: #e0e0e0;
-    font-weight: 500;
-  }
-  
-  .card-pasos {
-    white-space: pre-wrap; 
-  }
-  
-  .card-description {
-    margin-top: 10px;
-    font-style: italic;
-  }
-  
-  .category-tag, .time-badge, .difficulty-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #fff;
-    text-transform: capitalize;
-  }
-  
-  .category-tag { background-color: #4CAF50; }
-  .time-badge { background-color: #2196F3; }
-  .time-badge.fast { background-color: #FFC107; }
-  .difficulty-badge.media { background-color: #FF9800; }
-  .difficulty-badge.baja { background-color: #8BC34A; }
-  .difficulty-badge.alta { background-color: #F44336; }
-  .difficulty-badge.muy { background-color: #F44336; }
-
-  
-  .action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    margin-left: 8px;
-    transition: transform 0.2s;
-    color: #777;
-  }
-  
-  .action-btn:hover {
-    transform: scale(1.1);
-    color: #e0e0e0;
-  }
-  
-  .edit-btn svg { color: #2196F3; }
-  
-  .empty-state {
-    text-align: center;
-    padding: 50px;
-    font-size: 1.2rem;
-    color: #aaa;
-    grid-column: 1 / -1;
-  }
-  
-  @media (max-width: 768px) {
-    .recipes-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+}
 
 .card-body ul, .card-body ol {
-    margin: 8px 0 0 20px;
-    padding: 0;
-    color: #bbb;
-  }
-  
-  .card-body ul li, .card-body ol li {
-    margin-bottom: 4px;
-  }
-  
-  .card-section {
-    margin-top: 15px;
-  }
-  
-  .card-section strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #e0e0e0;
-  }
-  
-  .no-data {
-    font-style: italic;
-    color: #888;
-    margin-top: 5px;
-  }
+  margin: 8px 0 0 20px;
+  padding: 0;
+  color: #bbb;
+}
+ 
+.card-body ul li, .card-body ol li {
+  margin-bottom: 4px;
+}
+ 
+.card-section {
+  margin-top: 15px;
+}
+ 
+.card-section strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #e0e0e0;
+}
+ 
+.no-data {
+  font-style: italic;
+  color: #888;
+  margin-top: 5px;
+}
