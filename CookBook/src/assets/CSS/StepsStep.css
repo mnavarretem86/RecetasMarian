@@ -1,0 +1,180 @@
+.steps-section {
+  width: 100%;
+}
+
+.steps-list {
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.styled-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.step-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(187, 134, 252, 0.25);
+}
+
+.step-item-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.step-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  cursor: grab;
+  padding-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.step-drag-handle:active {
+  cursor: grabbing;
+}
+
+.step-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.step-number {
+  color: #c4b5fd;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-text {
+  color: #f3f4f6;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.remove-step-btn {
+  width: auto;
+  min-width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.remove-step-btn:hover {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.55);
+  color: #fca5a5;
+  transform: translateY(-1px);
+}
+
+.remove-step-btn:active {
+  transform: translateY(0);
+}
+
+.empty-steps-message {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.step-input-container-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.step-input-container-vertical input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.step-input-container-vertical input::placeholder {
+  color: #9ca3af;
+}
+
+.step-input-container-vertical input:focus {
+  border-color: #bb86fc;
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.18);
+}
+
+.add-step-btn {
+  width: fit-content;
+  padding: 0.8rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  background: #4caf50;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-step-btn:hover {
+  background: #43a047;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .step-item {
+    align-items: flex-start;
+    padding: 0.8rem;
+  }
+
+  .step-item-left {
+    gap: 0.6rem;
+  }
+
+  .step-content {
+    gap: 0.35rem;
+  }
+
+  .remove-step-btn {
+    min-width: 34px;
+    height: 34px;
+  }
+
+  .add-step-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

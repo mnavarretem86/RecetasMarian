@@ -1,0 +1,125 @@
+.usuario-form-page {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  background: var(--bg-card, #161616);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.usuario-form-header-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.usuario-form-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.usuario-form {
+  width: 100%;
+}
+
+.usuario-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.usuario-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary, #d1d1d1);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.usuario-form .form-group input,
+.usuario-form .form-group textarea,
+.usuario-form .form-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-primary, #ffffff);
+  transition: all 0.3s ease;
+}
+
+.usuario-form .form-group input:focus,
+.usuario-form .form-group textarea:focus,
+.usuario-form .form-group select:focus {
+  outline: none;
+  border-color: var(--primary, #bb86fc);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+}
+
+.usuario-form .form-group input::placeholder,
+.usuario-form .form-group textarea::placeholder {
+  color: var(--text-tertiary, #a1a1a1);
+}
+
+.usuario-form .form-group select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 3rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #aaa);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: auto;
+}
+
+.password-toggle-btn:hover {
+  color: var(--text-primary, #fff);
+  background: transparent;
+  transform: translateY(-50%);
+}
+
+.usuario-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .usuario-form-page {
+    padding: 1rem;
+  }
+
+  .usuario-form-card {
+    padding: 1rem;
+  }
+
+  .usuario-form-actions {
+    flex-direction: column;
+  }
+
+  .usuario-form-actions .header-btn {
+    width: 100%;
+  }
+}

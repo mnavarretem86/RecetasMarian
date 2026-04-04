@@ -19,7 +19,6 @@ const IngredientsStep = ({
  setStep,
  setIsModalOpen,
 }) => {
- // Lógica de validación: el botón estará deshabilitado si no hay ingredientes
  const isNextButtonDisabled = !currentRecipe.ingredientes || currentRecipe.ingredientes.length === 0;
 
  return (
@@ -113,7 +112,7 @@ const IngredientsStep = ({
    <div className="form-navigation full-width-align">
     <div className="left-buttons">
      <button type="button" onClick={() => setStep(1)} className="back-btn">
-      Volver: Información general
+       Información general
      </button>
     </div>
     <div className="right-buttons">
@@ -121,7 +120,7 @@ const IngredientsStep = ({
       Cancelar
      </button>
      <button type="button" onClick={() => setStep(3)} disabled={isNextButtonDisabled}>
-      Siguiente: Pasos
+       Pasos
      </button>
     </div>
    </div>

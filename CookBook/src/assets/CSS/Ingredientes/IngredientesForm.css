@@ -1,0 +1,155 @@
+.ingrediente-form-page {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  background: var(--bg-card, #161616);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.ingrediente-form-header-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ingrediente-form-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.ingrediente-form {
+  width: 100%;
+}
+
+.ingrediente-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.ingrediente-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary, #d1d1d1);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.ingrediente-form .form-group input,
+.ingrediente-form .form-group textarea,
+.ingrediente-form .form-group select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text-primary, #ffffff);
+  transition: all 0.3s ease;
+}
+
+.ingrediente-form .form-group input:focus,
+.ingrediente-form .form-group textarea:focus,
+.ingrediente-form .form-group select:focus {
+  outline: none;
+  border-color: var(--primary, #bb86fc);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+}
+
+.ingrediente-form .form-group input::placeholder,
+.ingrediente-form .form-group textarea::placeholder {
+  color: var(--text-tertiary, #a1a1a1);
+}
+
+.ingrediente-form .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.ingrediente-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.header-btn {
+  width: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border: none;
+}
+
+.header-btn.primary {
+  background: var(--primary, #bb86fc);
+  color: #111;
+}
+
+.header-btn.primary:hover {
+  background: var(--primary-variant, #9a5ffd);
+  transform: translateY(-2px);
+}
+
+.header-btn.secondary {
+  background: transparent;
+  color: var(--text-primary, #ffffff);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.header-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.header-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button.loading {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .ingrediente-form-page {
+    padding: 1rem;
+  }
+
+  .ingrediente-form-card {
+    padding: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ingrediente-form-actions {
+    flex-direction: column;
+  }
+
+  .ingrediente-form-actions .header-btn {
+    width: 100%;
+  }
+}

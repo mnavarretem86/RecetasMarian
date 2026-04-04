@@ -8,7 +8,6 @@ using System;
 
 namespace CookBook.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase

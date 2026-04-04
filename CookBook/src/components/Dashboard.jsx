@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useRecipeManagement } from '../hooks/useRecipeManagement';
 import RecipeForm from './RecipeForm';
 import RecipeTable from './RecipeTable';
+import DashboardHeader from './DashboardHeader';
 import '../assets/Dashboard.css';
 
 const Dashboard = ({ user, onLogout }) => {
@@ -30,13 +31,15 @@ const Dashboard = ({ user, onLogout }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage, setRecipesPerPage] = useState(8);
 
+  const isAuthenticated = !!user;
+
   const filteredAndSearchedRecipes = useMemo(() => {
     let filtered = recipes;
 
     if (selectedCategory) {
       filtered = filtered.filter((r) => r.categoria === selectedCategory);
     }
-      
+
     if (selectedDifficulty) {
       filtered = filtered.filter((r) => r.dificultad === selectedDifficulty);
     }
@@ -57,14 +60,17 @@ const Dashboard = ({ user, onLogout }) => {
   const totalPages = Math.ceil(totalRecipes / recipesPerPage);
 
   const handlePageChange = (page) => setCurrentPage(page);
+
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setCurrentPage(1);
   };
+
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
     setCurrentPage(1);
   };
+
   const handleRecipesPerPageChange = (e) => {
     setRecipesPerPage(Number(e.target.value));
     setCurrentPage(1);
@@ -83,24 +89,11 @@ const Dashboard = ({ user, onLogout }) => {
 
   return (
     <div className="dashboard">
-      <header className="dashboard-header">
-        <div className="header-left">
-          <h1>Bienvenido a CookBook</h1>
-          <p className="user-info-text">
-            Hola, <span className="username">{user?.displayName || 'Usuario'}</span>
-          </p>
-        </div>
-        <div className="header-right">
-          <button onClick={handleAddRecipe} className="add-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            Agregar Receta
-          </button>
-          <button onClick={onLogout} className="logout-btn">Cerrar Sesión</button>
-        </div>
-      </header>
+      <DashboardHeader
+        user={user}
+        onLogout={onLogout}
+        onAddRecipe={handleAddRecipe}
+      />
 
       <div className="search-bar-container">
         <div className="search-bar">
@@ -110,7 +103,15 @@ const Dashboard = ({ user, onLogout }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -120,11 +121,19 @@ const Dashboard = ({ user, onLogout }) => {
       <div className="filter-row">
         <div className="filter-controls">
           <div className="filter-label">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
               <path d="M22 3H2l8 9.46V19l4 3v-10.54L22 3z" />
             </svg>
             <span>Filtros:</span>
           </div>
+
           <select
             value={selectedCategory}
             onChange={handleCategoryChange}
@@ -137,6 +146,7 @@ const Dashboard = ({ user, onLogout }) => {
               </option>
             ))}
           </select>
+
           <select
             value={selectedDifficulty}
             onChange={handleDifficultyChange}
@@ -150,17 +160,24 @@ const Dashboard = ({ user, onLogout }) => {
             ))}
           </select>
         </div>
-        <button onClick={handleClearFilters} className="clear-filters-btn">Limpiar filtros</button>
+
+        <button onClick={handleClearFilters} className="clear-filters-btn">
+          Limpiar filtros
+        </button>
       </div>
 
       <RecipeTable
         recipes={currentRecipes}
         user={user}
-        onEdit={handleEditRecipe}
-        onDelete={(recipe) => {
-          setCurrentRecipe(recipe);
-          setIsDeleteConfirmOpen(true);
-        }}
+        onEdit={isAuthenticated ? handleEditRecipe : null}
+        onDelete={
+          isAuthenticated
+            ? (recipe) => {
+                setCurrentRecipe(recipe);
+                setIsDeleteConfirmOpen(true);
+              }
+            : null
+        }
       />
 
       <div className="pagination-row">
@@ -177,6 +194,7 @@ const Dashboard = ({ user, onLogout }) => {
           </select>
           <span>entradas</span>
         </div>
+
         <div className="pagination">
           <button
             className="page-btn arrow-btn"
@@ -185,20 +203,22 @@ const Dashboard = ({ user, onLogout }) => {
           >
             &lt;
           </button>
+
           <span className="page-info">
-            Página {currentPage} de {totalPages}
+            Página {currentPage} de {totalPages || 1}
           </span>
+
           <button
             className="page-btn arrow-btn"
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage === totalPages || totalPages === 0}
           >
             &gt;
           </button>
         </div>
       </div>
 
-      {isModalOpen && (
+      {isAuthenticated && isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>{currentRecipe?.id ? 'Editar Receta' : 'Agregar Receta'}</h3>
@@ -214,14 +234,26 @@ const Dashboard = ({ user, onLogout }) => {
           </div>
         </div>
       )}
-      {isDeleteConfirmOpen && (
+
+      {isAuthenticated && isDeleteConfirmOpen && (
         <div className="modal-overlay">
           <div className="confirm-modal">
             <h3>¿Eliminar receta?</h3>
-            <p>¿Estás seguro que deseas eliminar "{currentRecipe?.nombre}"? Esta acción no se puede deshacer.</p>
+            <p>
+              ¿Estás seguro que deseas eliminar "{currentRecipe?.nombre}"? Esta acción no se puede deshacer.
+            </p>
             <div className="modal-actions">
-              <button onClick={() => setIsDeleteConfirmOpen(false)} className="cancel-btn">Cancelar</button>
-              <button onClick={() => handleDeleteRecipe(currentRecipe)} className="delete-btn" disabled={isLoading}>
+              <button
+                onClick={() => setIsDeleteConfirmOpen(false)}
+                className="cancel-btn"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => handleDeleteRecipe(currentRecipe)}
+                className="delete-btn"
+                disabled={isLoading}
+              >
                 {isLoading ? 'Eliminando...' : 'Eliminar'}
               </button>
             </div>

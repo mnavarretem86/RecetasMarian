@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 namespace CookBook.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DificultadController : ControllerBase

@@ -1,1 +1,12 @@
-{"Version":1,"Hash":"HN2Kipa4WF098hL+AF9i8oqAQ1/iCGlTCoTvsJ38P/s=","Source":"CookBook.API","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "dqB1QMwO0rwXLC9s1TcQiitX+lcsVQnc4naw3F3tpAA=",
+  "Source": "CookBook.API",
+  "BasePath": "_content/CookBook.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

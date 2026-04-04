@@ -70,7 +70,7 @@ const GeneralInfoStep = ({
     </div>
     <div className="right-buttons">
      <button type="button" onClick={() => setStep(2)} disabled={!isFormValid}>
-      Siguiente: Ingredientes
+       Ingredientes
      </button>
     </div>
    </div>

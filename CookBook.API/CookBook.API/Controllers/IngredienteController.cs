@@ -7,7 +7,6 @@ using System;
 
 namespace CookBook.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class IngredienteController : ControllerBase
