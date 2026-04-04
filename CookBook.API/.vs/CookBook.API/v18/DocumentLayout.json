@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|c:\\users\\usuario\\onedrive\\desktop\\recetasmarian\\cookbook.api\\cookbook.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|solutionrelative:cookbook.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|c:\\users\\usuario\\onedrive\\desktop\\recetasmarian\\cookbook.api\\cookbook.api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0DFFD372-769E-480F-970A-202902E1AA15}|CookBook.API\\CookBook.API.csproj|solutionrelative:cookbook.api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|c:\\users\\usuario\\onedrive\\desktop\\recetasmarian\\cookbook.api\\capa_datos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|solutionrelative:capa_datos\\cd_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|c:\\users\\usuario\\onedrive\\desktop\\recetasmarian\\cookbook.api\\capa_datos\\cd_categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CF7953E-B14B-4E01-B148-525A973349B9}|CAPA_DATOS\\CAPA_DATOS.csproj|solutionrelative:capa_datos\\cd_categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|c:\\users\\usuario\\onedrive\\desktop\\recetasmarian\\cookbook.api\\capa_entidades\\ce_auth_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04D54006-CBD6-4598-AE8A-CF1F272EB172}|CAPA_ENTIDADES\\CAPA_ENTIDADES.csproj|solutionrelative:capa_entidades\\ce_auth_usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "CookBook.API\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "CookBook.API\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T17:50:11.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CD_USUARIO.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CD_USUARIO.cs",
+              "RelativeDocumentMoniker": "CAPA_DATOS\\CD_USUARIO.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CD_USUARIO.cs",
+              "RelativeToolTip": "CAPA_DATOS\\CD_USUARIO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T17:49:52.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CD_CATEGORIA.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CD_CATEGORIA.cs",
+              "RelativeDocumentMoniker": "CAPA_DATOS\\CD_CATEGORIA.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_DATOS\\CD_CATEGORIA.cs",
+              "RelativeToolTip": "CAPA_DATOS\\CD_CATEGORIA.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T17:49:51.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CE_AUTH_USUARIO.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CE_AUTH_USUARIO.cs",
+              "RelativeDocumentMoniker": "CAPA_ENTIDADES\\CE_AUTH_USUARIO.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CAPA_ENTIDADES\\CE_AUTH_USUARIO.cs",
+              "RelativeToolTip": "CAPA_ENTIDADES\\CE_AUTH_USUARIO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T17:49:44.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\appsettings.json",
+              "RelativeDocumentMoniker": "CookBook.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\USUARIO\\OneDrive\\Desktop\\RecetasMarian\\CookBook.API\\CookBook.API\\appsettings.json",
+              "RelativeToolTip": "CookBook.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-02T17:32:35.846Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

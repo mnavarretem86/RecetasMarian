@@ -50,3 +50,4 @@ C:\Users\USUARIO\OneDrive\Desktop\RecetasMarian\CookBook.API\CAPA_ENTIDADES\obj\
 C:\Users\USUARIO\OneDrive\Desktop\RecetasMarian\CookBook.API\CAPA_ENTIDADES\obj\Debug\CAPA_ENT.72689660.Up2Date
 C:\Users\USUARIO\OneDrive\Desktop\RecetasMarian\CookBook.API\CAPA_ENTIDADES\obj\Debug\CAPA_ENTIDADES.dll
 C:\Users\USUARIO\OneDrive\Desktop\RecetasMarian\CookBook.API\CAPA_ENTIDADES\obj\Debug\CAPA_ENTIDADES.pdb
+C:\Users\USUARIO\OneDrive\Desktop\RecetasMarian\CookBook.API\CAPA_ENTIDADES\bin\Debug\System.ComponentModel.Annotations.dll

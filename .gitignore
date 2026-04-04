@@ -1,0 +1,69 @@
+############################
+# 🔥 GENERAL
+############################
+.DS_Store
+Thumbs.db
+*.log
+logs/
+debug.log
+
+############################
+# ⚛️ NODE / REACT
+############################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+build/
+dist/
+.cache/
+
+.env
+.env.*
+*.local
+
+coverage/
+.npm/
+
+############################
+# 🧱 .NET / C#
+############################
+bin/
+obj/
+out/
+
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+############################
+# 🔐 CONFIG SENSIBLE
+############################
+appsettings.Development.json
+appsettings.Local.json
+
+############################
+# 🧾 BASE DE DATOS
+############################
+*.mdf
+*.ldf
+*.bak
+
+############################
+# 🧠 IDEs
+############################
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+############################
+# 📦 MISC
+############################
+*.tgz
+*.swp
+*.lock-wscript
